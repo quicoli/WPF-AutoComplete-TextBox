@@ -1,0 +1,114 @@
+﻿<Window x:Class="WpfConstrols.Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfConstrols.Demo"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:providers="clr-namespace:WpfConstrols.Demo.Providers"
+        xmlns:editors="http://wpfcontrols.com/"
+        mc:Ignorable="d"
+        Title="WPF AutoComplete Demo" Height="350" Width="525"
+        
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        ResizeMode="NoResize"
+        TextElement.FontSize="14"
+        TextElement.FontWeight="Medium"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+
+    <Window.Resources>
+        <providers:StateSuggestionProvider x:Key="StateSuggestionProvider"/>
+        <DataTemplate x:Key="StateTemplate">
+            <Grid>
+                <TextBlock Text="{Binding Path=Name}"></TextBlock>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Border BorderThickness="2" BorderBrush="{StaticResource MaterialDesignTextBoxBorder}">
+        <DockPanel Background="{StaticResource MaterialDesignPaper}"
+               
+               LastChildFill="True">
+        <materialDesign:ColorZone Height="50"
+                           DockPanel.Dock="Top"
+                           Mode="PrimaryMid"
+                           MouseDown="Titlebar_OnMouseDown"
+                           
+                           >
+            <DockPanel>
+                <Button x:Name="BtnClose"
+                        Click="BtnClose_Click"
+                            Height="20"
+                            VerticalAlignment="Top"
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource CloseButtonStyle}"
+                            ToolTip="Close" />
+                <Button x:Name="BtnMin"
+                            Height="20"
+                            VerticalAlignment="Top"
+                            Click="BtnMin_Click"
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource MinimizeButtonStyle}"
+                            ToolTip="Minimize" />
+                <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="16">
+                        WPF AutoComplete TextBox Demo
+                </TextBlock>
+            </DockPanel>
+        </materialDesign:ColorZone>
+        <materialDesign:ColorZone Height="30"
+                        Mode="PrimaryLight"
+                        DockPanel.Dock="Bottom"           
+                        Padding="8">
+            <Border>
+                <TextBlock FontSize="12" Text="Contact: pauloquicoli@gmail.com"/>
+            </Border>
+        </materialDesign:ColorZone>
+
+
+        <Grid x:Name="GridContent" Margin="5,0,0,0" DockPanel.Dock="Bottom">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Margin="0,20,0,0" Orientation="Vertical">
+                    <TextBlock Foreground="{StaticResource PrimaryHueDarkBrush}">Your name</TextBlock>
+                    <TextBox MaxLength="100" CharacterCasing="Upper" 
+                             Width="450" HorizontalAlignment="Left" 
+                             ToolTip="Type your full name please"
+                             Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}">
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,20,0,0" Orientation="Vertical">
+                    <TextBlock Foreground="{StaticResource PrimaryHueDarkBrush}">State</TextBlock>
+                    <editors:AutoCompleteTextBox HorizontalAlignment="Left"
+                                                 Text=""
+                                                 Style="{StaticResource MaterialAutoCompleteTextBox}"
+                                                 MaxLength="50"                         
+                                                 CharacterCasing="Upper"
+                                                 DisplayMember="Name"
+                                                 Height="26"
+                                                 Width="450"
+                                                 Provider="{StaticResource ResourceKey=StateSuggestionProvider}"
+                                                 ItemTemplate="{StaticResource ResourceKey=StateTemplate}">
+                        <editors:AutoCompleteTextBox.SelectedItem>
+                            <Binding Path="SelectedState" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                            </Binding>
+                        </editors:AutoCompleteTextBox.SelectedItem>
+                        <editors:AutoCompleteTextBox.LoadingContent>
+                            <TextBlock Text="Loading..." Margin="5" FontSize="14" />
+                        </editors:AutoCompleteTextBox.LoadingContent>
+                    </editors:AutoCompleteTextBox>
+
+                </StackPanel>
+
+            </StackPanel>
+
+        </Grid>
+    </DockPanel>
+    </Border>
+</Window>
