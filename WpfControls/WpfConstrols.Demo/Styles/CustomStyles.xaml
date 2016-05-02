@@ -137,7 +137,7 @@
         <Setter Property="BorderThickness" Value="0 0 0 1"/>
         <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <!--<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>-->
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -192,6 +192,7 @@
                                                  ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                                  Focusable="False"
                                                  BorderThickness="0"
+                                                 MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
                                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                                                 >

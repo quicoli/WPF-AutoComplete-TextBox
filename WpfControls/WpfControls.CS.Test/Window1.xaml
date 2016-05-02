@@ -82,6 +82,7 @@
         <wpf:AutoCompleteTextBox VerticalAlignment="Top"
                                  Height="25"
                                  Grid.Column="1"
+                                 MaxPopupHeight="120"
                                  DisplayMember="FullName"
                                  ItemTemplateSelector="{StaticResource CustomTemplateSelector}"
                                  Watermark="Search here"
