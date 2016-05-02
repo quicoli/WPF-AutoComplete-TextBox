@@ -21,6 +21,7 @@ This control originally features:
 3. Removed VB.NET stuff from original solution.
 4. Added a new demo showcasing the new capabilities
 5. Added a custom style in the new demo, turning on validation messages  
+6. Added property MaxPopupHeight. Setting this property, will limit the popup height to the size you wish.
 
 ### The Demo WpfControls.Demo
 
