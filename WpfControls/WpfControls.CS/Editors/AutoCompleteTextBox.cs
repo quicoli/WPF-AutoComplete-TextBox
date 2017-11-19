@@ -305,9 +305,19 @@
                 SelectionAdapter.Commit += OnSelectionAdapterCommit;
                 SelectionAdapter.Cancel += OnSelectionAdapterCancel;
                 SelectionAdapter.SelectionChanged += OnSelectionAdapterSelectionChanged;
+                ItemsSelector.PreviewMouseDown += ItemsSelector_PreviewMouseDown;
             }
         }
-
+        private void ItemsSelector_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var pos_item = (e.OriginalSource as FrameworkElement)?.DataContext;
+            if (pos_item == null)
+                return;
+            if (!ItemsSelector.Items.Contains(pos_item))
+                return;
+            ItemsSelector.SelectedItem = pos_item;
+            OnSelectionAdapterCommit();
+        }
         private void AutoCompleteTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             Editor?.Focus();
@@ -484,9 +494,9 @@
                 ParameterizedThreadStart thInfo = new ParameterizedThreadStart(GetSuggestionsAsync);
                 Thread th = new Thread(thInfo);
                 th.Start(new object[] {
-				searchText,
-				_actb.Provider
-			});
+                searchText,
+                _actb.Provider
+            });
             }
 
             private void DisplaySuggestions(IEnumerable suggestions, string filter)
@@ -511,9 +521,9 @@
                 ISuggestionProvider provider = args[1] as ISuggestionProvider;
                 IEnumerable list = provider.GetSuggestions(searchText);
                 _actb.Dispatcher.BeginInvoke(new Action<IEnumerable, string>(DisplaySuggestions), DispatcherPriority.Background, new object[] {
-				list,
-				searchText
-			});
+                list,
+                searchText
+            });
             }
 
             #endregion
