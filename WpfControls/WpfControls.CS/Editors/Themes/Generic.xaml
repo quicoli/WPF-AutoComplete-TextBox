@@ -10,7 +10,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Border x:Name="ContentBorder"
-                            Background="White">
+                            Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:AutoCompleteTextBox}, Mode=OneWay}">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>

@@ -1,4 +1,4 @@
-﻿namespace WpfControls.Editors
+namespace WpfControls.Editors
 {
 
     using System;
@@ -9,6 +9,7 @@
     using System.Windows.Controls.Primitives;
     using System.Windows.Data;
     using System.Windows.Input;
+    using System.Windows.Media;
     using System.Windows.Threading;
 
     [TemplatePart(Name = AutoCompleteTextBox.PartEditor, Type = typeof(TextBox))]
@@ -42,6 +43,8 @@
         public static readonly DependencyProperty MaxPopUpHeightProperty = DependencyProperty.Register("MaxPopUpHeight", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(600));
 
         public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
+
+        public static readonly DependencyProperty SuggestionBackgroundProperty = DependencyProperty.Register("SuggestionBackground", typeof(Brush), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(Brushes.White));
         private BindingEvaluator _bindingEvaluator;
 
         private TextBox _editor;
@@ -240,6 +243,11 @@
             get { return (string)GetValue(WatermarkProperty); }
 
             set { SetValue(WatermarkProperty, value); }
+        }
+        public Brush SuggestionBackground {
+            get { return (Brush)GetValue(SuggestionBackgroundProperty); }
+
+            set { SetValue(SuggestionBackgroundProperty, value); }
         }
 
         #endregion
