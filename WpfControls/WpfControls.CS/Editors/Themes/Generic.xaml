@@ -86,6 +86,7 @@
                                     <TextBox x:Name="PART_Editor"
                                              HorizontalAlignment="Stretch"
                                              VerticalAlignment="Center"
+											 Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                              Style="{StaticResource ResourceKey=TransparentTextBoxStyle}"
                                              Text="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
                                 </Grid>
