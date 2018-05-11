@@ -292,9 +292,11 @@ namespace WpfControls.Editors
                 Editor.PreviewKeyDown += OnEditorKeyDown;
                 Editor.LostFocus += OnEditorLostFocus;
 
-                if (SelectedItem != null)
+                if (SelectedItem != null) 
                 {
+                    _isUpdatingText = true;
                     Editor.Text = BindingEvaluator.Evaluate(SelectedItem);
+                    _isUpdatingText = false;
                 }
 
             }
