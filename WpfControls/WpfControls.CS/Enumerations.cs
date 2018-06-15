@@ -1,5 +1,8 @@
-﻿public enum IconPlacement
+﻿namespace WpfControls
 {
-    Left,
-    Right
+    public enum IconPlacement
+    {
+        Left,
+        Right
+    }
 }

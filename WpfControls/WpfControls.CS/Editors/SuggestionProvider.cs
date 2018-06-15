@@ -1,15 +1,15 @@
-﻿namespace WpfControls.Editors
-{
+﻿using System;
+using System.Collections;
 
-    using System;
-    using System.Collections;
+namespace WpfControls.Editors
+{
     public class SuggestionProvider : ISuggestionProvider
     {
 
 
         #region Private Fields
 
-        private Func<string, IEnumerable> _method;
+        private readonly Func<string, IEnumerable> _method;
 
         #endregion Private Fields
 
@@ -17,18 +17,14 @@
 
         public SuggestionProvider(Func<string, IEnumerable> method)
         {
-            if (method == null)
-            {
-                throw new ArgumentNullException("method");
-            }
-            _method = method;
+            _method = method ?? throw new ArgumentNullException(nameof(method));
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public System.Collections.IEnumerable GetSuggestions(string filter)
+        public IEnumerable GetSuggestions(string filter)
         {
             return _method(filter);
         }

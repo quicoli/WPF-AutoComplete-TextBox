@@ -1,16 +1,15 @@
-﻿namespace WpfControls.CS.Test
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using WpfControls.Editors;
+
+namespace WpfControls.CS.Test
 {
-
-    using System.Collections.Generic;
-    using System.IO;
-    using WpfControls.Editors;
-    using System.Linq;
-    using System.Threading;
-
     public class FilesystemSuggestionProvider : ISuggestionProvider
     {
 
-        public System.Collections.IEnumerable GetSuggestions(string filter)
+        public IEnumerable GetSuggestions(string filter)
         {
             if (string.IsNullOrEmpty(filter))
             {
@@ -26,12 +25,12 @@
                 return null;
             }
 
-            List<System.IO.FileSystemInfo> lst = new List<System.IO.FileSystemInfo>();
+            List<FileSystemInfo> lst = new List<FileSystemInfo>();
             string dirFilter = "*";
             string dirPath = filter;
             if (!filter.EndsWith("\\"))
             {
-                int index = filter.LastIndexOf("\\");
+                int index = filter.LastIndexOf("\\", StringComparison.Ordinal);
                 dirPath = filter.Substring(0, index + 1);
                 dirFilter = filter.Substring(index + 1) + "*";
             }
@@ -40,7 +39,5 @@
             lst.AddRange(dirInfo.GetFiles(dirFilter));
             return lst;
         }
-
     }
-
 }

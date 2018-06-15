@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using WpfControls.CS.Test.Properties;
 
 namespace WpfControls.CS.Test
 {
@@ -16,37 +15,35 @@ namespace WpfControls.CS.Test
     {
         #region Public Methods
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Icon iconFile = SystemIcons.WinLogo;
-            FileSystemInfo fsInfo = value as FileSystemInfo;
 
-            if (fsInfo != null)
+            if (value is FileSystemInfo fsInfo)
             {
                 try
                 {
                     if (fsInfo is DirectoryInfo)
                     {
-                        iconFile = Properties.Resources.folder_2_32;
+                        iconFile = Resources.folder_2_32;
                     }
                     else
                     {
                         string filePath = fsInfo.FullName;
 
-                        if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
+                        if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
                             iconFile = Icon.ExtractAssociatedIcon(filePath);
                     }
                 }
                 catch (Exception)
                 {
-                    
+                    // ignored
                 }
-                
             }
             return ConvertToImageSource(iconFile);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }

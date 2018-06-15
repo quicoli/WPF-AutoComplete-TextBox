@@ -1,26 +1,18 @@
-﻿
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Windows;
+using System.Windows.Input;
 
 namespace WpfControls.CS.Test
 {
-
-    using Microsoft.VisualBasic;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Windows.Input;
-    using System.Windows;
-
     public class MainWindowViewModel : INotifyPropertyChanged
     {
 
         #region "Fields"
 
         private ICommand _cancelCommand;
-        private string _fileName;
         private ICommand _openCommand;
 
         private FileSystemInfo _selectedPath;
@@ -41,39 +33,15 @@ namespace WpfControls.CS.Test
 
         #region "Properties"
 
-        public ICommand CancelCommand
-        {
-            get
-            {
-                if (_cancelCommand == null)
-                {
-                    _cancelCommand = new DelegateCommand(ExecuteCancelCommand, null);
-                }
-                return _cancelCommand;
-            }
-        }
+        public ICommand CancelCommand => _cancelCommand ?? (_cancelCommand = new DelegateCommand(ExecuteCancelCommand, null));
 
-        public string FileName
-        {
-            get { return _fileName; }
-            set { _fileName = value; }
-        }
+        public string FileName { get; set; }
 
-        public ICommand OpenCommand
-        {
-            get
-            {
-                if (_openCommand == null)
-                {
-                    _openCommand = new DelegateCommand(ExecuteOpenCommand, null);
-                }
-                return _openCommand;
-            }
-        }
+        public ICommand OpenCommand => _openCommand ?? (_openCommand = new DelegateCommand(ExecuteOpenCommand, null));
 
         public FileSystemInfo SelectedPath
         {
-            get { return _selectedPath; }
+            get => _selectedPath;
             set { _selectedPath = value; RaisePropertyChanged("SelectedPath"); }
         }
         #endregion
@@ -82,10 +50,7 @@ namespace WpfControls.CS.Test
 
         protected virtual void RaisePropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void ExecuteCancelCommand(object param)
@@ -102,11 +67,10 @@ namespace WpfControls.CS.Test
             }
             catch (Exception)
             {
-
+                // ignored
             }
         }
 
         #endregion
-
     }
 }

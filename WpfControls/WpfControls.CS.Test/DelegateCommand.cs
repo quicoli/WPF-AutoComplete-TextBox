@@ -1,21 +1,17 @@
-﻿namespace WpfControls.CS.Test
-{
+﻿using System;
+using System.Windows.Input;
 
-    using System;
-    using System.Windows.Input;
+namespace WpfControls.CS.Test
+{
     public class DelegateCommand : ICommand
     {
 
-        private Action<object> _executeMethod;
+        private readonly Action<object> _executeMethod;
 
-        private Func<object, bool> _canExecuteMethod;
+        private readonly Func<object, bool> _canExecuteMethod;
         public DelegateCommand(Action<object> executeMethod, Func<object, bool> canExecuteMethod)
         {
-            if (executeMethod == null)
-            {
-                throw new ArgumentNullException("executeMethod");
-            }
-            _executeMethod = executeMethod;
+            _executeMethod = executeMethod ?? throw new ArgumentNullException(nameof(executeMethod));
             _canExecuteMethod = canExecuteMethod;
         }
 
@@ -38,8 +34,7 @@
         public void RaiseCanExecuteChanged()
         {
             EventHandler handler = CanExecuteChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
     }
 }
