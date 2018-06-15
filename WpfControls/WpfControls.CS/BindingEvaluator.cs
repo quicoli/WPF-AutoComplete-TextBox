@@ -1,8 +1,8 @@
-﻿namespace WpfControls
-{
+﻿using System.Windows;
+using System.Windows.Data;
 
-    using System.Windows;
-    using System.Windows.Data;
+namespace WpfControls
+{
     public class BindingEvaluator : FrameworkElement
     {
 
@@ -11,7 +11,6 @@
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(BindingEvaluator), new FrameworkPropertyMetadata(string.Empty));
 
-        private Binding _valueBinding;
         #endregion
 
         #region "Constructors"
@@ -27,16 +26,12 @@
 
         public string Value
         {
-            get { return (string)GetValue(ValueProperty); }
+            get => (string)GetValue(ValueProperty);
 
-            set { SetValue(ValueProperty, value); }
+            set => SetValue(ValueProperty, value);
         }
 
-        public Binding ValueBinding
-        {
-            get { return _valueBinding; }
-            set { _valueBinding = value; }
-        }
+        public Binding ValueBinding { get; set; }
 
         #endregion
 
@@ -44,13 +39,11 @@
 
         public string Evaluate(object dataItem)
         {
-            this.DataContext = dataItem;
+            DataContext = dataItem;
             SetBinding(ValueProperty, ValueBinding);
             return Value;
         }
 
         #endregion
-
     }
-
 }

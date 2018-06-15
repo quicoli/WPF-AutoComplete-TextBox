@@ -1,9 +1,7 @@
-﻿
+﻿using System.Collections;
 
 namespace WpfControls.Editors
 {
-    using System.Collections;
-
     public interface ISuggestionProvider
     {
 

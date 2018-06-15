@@ -1,17 +1,13 @@
-﻿namespace WpfControls.Editors
+﻿using System.Diagnostics;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+
+namespace WpfControls.Editors
 {
-
-    using System.Diagnostics;
-    using System.Windows.Controls.Primitives;
-    using System.Windows.Input;
-
     public class SelectionAdapter
     {
 
         #region "Fields"
-
-
-        private Selector _selectorControl;
         #endregion
 
         #region "Constructors"
@@ -39,11 +35,7 @@
 
         #region "Properties"
 
-        public Selector SelectorControl
-        {
-            get { return _selectorControl; }
-            set { _selectorControl = value; }
-        }
+        public Selector SelectorControl { get; set; }
 
         #endregion
 
@@ -61,24 +53,15 @@
                     DecrementSelection();
                     break;
                 case Key.Enter:
-                    if (Commit != null)
-                    {
-                        Commit();
-                    }
+                    Commit?.Invoke();
 
                     break;
                 case Key.Escape:
-                    if (Cancel != null)
-                    {
-                        Cancel();
-                    }
+                    Cancel?.Invoke();
 
                     break;
                 case Key.Tab:
-                    if (Commit != null)
-                    {
-                        Commit();
-                    }
+                    Commit?.Invoke();
 
                     break;
             }
@@ -94,10 +77,8 @@
             {
                 SelectorControl.SelectedIndex -= 1;
             }
-            if (SelectionChanged != null)
-            {
-                SelectionChanged();
-            }
+
+            SelectionChanged?.Invoke();
         }
 
         private void IncrementSelection()
@@ -110,18 +91,13 @@
             {
                 SelectorControl.SelectedIndex += 1;
             }
-            if (SelectionChanged != null)
-            {
-                SelectionChanged();
-            }
+
+            SelectionChanged?.Invoke();
         }
 
         private void OnSelectorMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Commit != null)
-            {
-                Commit();
-            }
+            Commit?.Invoke();
         }
 
         #endregion

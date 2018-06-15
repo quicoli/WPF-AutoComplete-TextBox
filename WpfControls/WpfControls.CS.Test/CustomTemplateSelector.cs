@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,9 +13,7 @@ namespace WpfControls.CS.Test
         {
             if (item is FileInfo)
                 return FileTemplate;
-            else if (item is DirectoryInfo)
-                return DirectoryTemplate;
-            return base.SelectTemplate(item, container);
+            return item is DirectoryInfo ? DirectoryTemplate : base.SelectTemplate(item, container);
         }
     }
 }

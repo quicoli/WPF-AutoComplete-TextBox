@@ -1,20 +1,19 @@
+using System;
+using System.Collections;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
+
 namespace WpfControls.Editors
 {
-
-    using System;
-    using System.Collections;
-    using System.Threading;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
-    using System.Windows.Data;
-    using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Threading;
-
-    [TemplatePart(Name = AutoCompleteTextBox.PartEditor, Type = typeof(TextBox))]
-    [TemplatePart(Name = AutoCompleteTextBox.PartPopup, Type = typeof(Popup))]
-    [TemplatePart(Name = AutoCompleteTextBox.PartSelector, Type = typeof(Selector))]
+    [TemplatePart(Name = PartEditor, Type = typeof(TextBox))]
+    [TemplatePart(Name = PartPopup, Type = typeof(Popup))]
+    [TemplatePart(Name = PartSelector, Type = typeof(Selector))]
     public class AutoCompleteTextBox : Control
     {
 
@@ -45,27 +44,12 @@ namespace WpfControls.Editors
         public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty SuggestionBackgroundProperty = DependencyProperty.Register("SuggestionBackground", typeof(Brush), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(Brushes.White));
-        private BindingEvaluator _bindingEvaluator;
-
-        private TextBox _editor;
-
-        private DispatcherTimer _fetchTimer;
-
-        private string _filter;
-
         private bool _isUpdatingText;
-
-        private Selector _itemsSelector;
-
-        private Popup _popup;
-
-        private SelectionAdapter _selectionAdapter;
-
         private bool _selectionCancelled;
 
         private SuggestionsAdapter _suggestionsAdapter;
 
-        
+
         #endregion
 
         #region "Constructors"
@@ -79,175 +63,148 @@ namespace WpfControls.Editors
 
         #region "Properties"
 
-       
+
         public int MaxPopupHeight
         {
-            get { return (int) GetValue(MaxPopUpHeightProperty); }
-            set { SetValue(MaxPopUpHeightProperty, value);}
+            get => (int)GetValue(MaxPopUpHeightProperty);
+            set => SetValue(MaxPopUpHeightProperty, value);
         }
 
-      
-        public BindingEvaluator BindingEvaluator
-        {
-            get { return _bindingEvaluator; }
-            set { _bindingEvaluator = value; }
-        }
+
+        public BindingEvaluator BindingEvaluator { get; set; }
 
         public CharacterCasing CharacterCasing
         {
-            get { return (System.Windows.Controls.CharacterCasing) GetValue(CharacterCasingProperty); }
-            set { SetValue(CharacterCasingProperty, value);}
+            get => (CharacterCasing)GetValue(CharacterCasingProperty);
+            set => SetValue(CharacterCasingProperty, value);
         }
 
         public int MaxLength
         {
-            get { return (int) GetValue(DelayProperty); }
-            set { SetValue(MaxLengthProperty, value); }
+            get => (int)GetValue(DelayProperty);
+            set => SetValue(MaxLengthProperty, value);
         }
 
         public int Delay
         {
-            get { return (int)GetValue(DelayProperty); }
+            get => (int)GetValue(DelayProperty);
 
-            set { SetValue(DelayProperty, value); }
+            set => SetValue(DelayProperty, value);
         }
 
         public string DisplayMember
         {
-            get { return (string)GetValue(DisplayMemberProperty); }
+            get => (string)GetValue(DisplayMemberProperty);
 
-            set { SetValue(DisplayMemberProperty, value); }
+            set => SetValue(DisplayMemberProperty, value);
         }
 
-        public TextBox Editor
-        {
-            get { return _editor; }
-            set { _editor = value; }
-        }
+        public TextBox Editor { get; set; }
 
-        public DispatcherTimer FetchTimer
-        {
-            get { return _fetchTimer; }
-            set { _fetchTimer = value; }
-        }
+        public DispatcherTimer FetchTimer { get; set; }
 
-        public string Filter
-        {
-            get { return _filter; }
-            set { _filter = value; }
-        }
+        public string Filter { get; set; }
 
         public object Icon
         {
-            get { return GetValue(IconProperty); }
+            get => GetValue(IconProperty);
 
-            set { SetValue(IconProperty, value); }
+            set => SetValue(IconProperty, value);
         }
 
         public IconPlacement IconPlacement
         {
-            get { return (IconPlacement)GetValue(IconPlacementProperty); }
+            get => (IconPlacement)GetValue(IconPlacementProperty);
 
-            set { SetValue(IconPlacementProperty, value); }
+            set => SetValue(IconPlacementProperty, value);
         }
 
         public Visibility IconVisibility
         {
-            get { return (Visibility)GetValue(IconVisibilityProperty); }
+            get => (Visibility)GetValue(IconVisibilityProperty);
 
-            set { SetValue(IconVisibilityProperty, value); }
+            set => SetValue(IconVisibilityProperty, value);
         }
 
         public bool IsDropDownOpen
         {
-            get { return (bool)GetValue(IsDropDownOpenProperty); }
+            get => (bool)GetValue(IsDropDownOpenProperty);
 
-            set { SetValue(IsDropDownOpenProperty, value); }
+            set => SetValue(IsDropDownOpenProperty, value);
         }
 
         public bool IsLoading
         {
-            get { return (bool)GetValue(IsLoadingProperty); }
+            get => (bool)GetValue(IsLoadingProperty);
 
-            set { SetValue(IsLoadingProperty, value); }
+            set => SetValue(IsLoadingProperty, value);
         }
 
         public bool IsReadOnly
         {
-            get { return (bool)GetValue(IsReadOnlyProperty); }
+            get => (bool)GetValue(IsReadOnlyProperty);
 
-            set { SetValue(IsReadOnlyProperty, value); }
+            set => SetValue(IsReadOnlyProperty, value);
         }
 
-        public Selector ItemsSelector
-        {
-            get { return _itemsSelector; }
-            set { _itemsSelector = value; }
-        }
+        public Selector ItemsSelector { get; set; }
 
         public DataTemplate ItemTemplate
         {
-            get { return (DataTemplate)GetValue(ItemTemplateProperty); }
+            get => (DataTemplate)GetValue(ItemTemplateProperty);
 
-            set { SetValue(ItemTemplateProperty, value); }
+            set => SetValue(ItemTemplateProperty, value);
         }
 
         public DataTemplateSelector ItemTemplateSelector
         {
-            get { return ((DataTemplateSelector)(GetValue(AutoCompleteTextBox.ItemTemplateSelectorProperty))); }
-            set { SetValue(AutoCompleteTextBox.ItemTemplateSelectorProperty, value); }
+            get => ((DataTemplateSelector)(GetValue(ItemTemplateSelectorProperty)));
+            set => SetValue(ItemTemplateSelectorProperty, value);
         }
 
         public object LoadingContent
         {
-            get { return GetValue(LoadingContentProperty); }
+            get => GetValue(LoadingContentProperty);
 
-            set { SetValue(LoadingContentProperty, value); }
+            set => SetValue(LoadingContentProperty, value);
         }
 
-        public Popup Popup
-        {
-            get { return _popup; }
-            set { _popup = value; }
-        }
+        public Popup Popup { get; set; }
 
         public ISuggestionProvider Provider
         {
-            get { return (ISuggestionProvider)GetValue(ProviderProperty); }
+            get => (ISuggestionProvider)GetValue(ProviderProperty);
 
-            set { SetValue(ProviderProperty, value); }
+            set => SetValue(ProviderProperty, value);
         }
 
         public object SelectedItem
         {
-            get { return GetValue(SelectedItemProperty); }
+            get => GetValue(SelectedItemProperty);
 
-            set { SetValue(SelectedItemProperty, value); }
+            set => SetValue(SelectedItemProperty, value);
         }
 
-        public SelectionAdapter SelectionAdapter
-        {
-            get { return _selectionAdapter; }
-            set { _selectionAdapter = value; }
-        }
+        public SelectionAdapter SelectionAdapter { get; set; }
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
+            get => (string)GetValue(TextProperty);
 
-            set { SetValue(TextProperty, value); }
+            set => SetValue(TextProperty, value);
         }
 
         public string Watermark
         {
-            get { return (string)GetValue(WatermarkProperty); }
+            get => (string)GetValue(WatermarkProperty);
 
-            set { SetValue(WatermarkProperty, value); }
+            set => SetValue(WatermarkProperty, value);
         }
-        public Brush SuggestionBackground {
-            get { return (Brush)GetValue(SuggestionBackgroundProperty); }
+        public Brush SuggestionBackground
+        {
+            get => (Brush)GetValue(SuggestionBackgroundProperty);
 
-            set { SetValue(SuggestionBackgroundProperty, value); }
+            set => SetValue(SuggestionBackgroundProperty, value);
         }
 
         #endregion
@@ -271,12 +228,11 @@ namespace WpfControls.Editors
 
         private void ScrollToSelectedItem()
         {
-            ListBox listBox = ItemsSelector as ListBox;
-            if (listBox != null && listBox.SelectedItem != null)
+            if (ItemsSelector is ListBox listBox && listBox.SelectedItem != null)
                 listBox.ScrollIntoView(listBox.SelectedItem);
         }
 
-        
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -292,7 +248,7 @@ namespace WpfControls.Editors
                 Editor.PreviewKeyDown += OnEditorKeyDown;
                 Editor.LostFocus += OnEditorLostFocus;
 
-                if (SelectedItem != null) 
+                if (SelectedItem != null)
                 {
                     _isUpdatingText = true;
                     Editor.Text = BindingEvaluator.Evaluate(SelectedItem);
@@ -301,7 +257,7 @@ namespace WpfControls.Editors
 
             }
 
-            this.GotFocus += AutoCompleteTextBox_GotFocus;
+            GotFocus += AutoCompleteTextBox_GotFocus;
 
             if (Popup != null)
             {
@@ -320,12 +276,11 @@ namespace WpfControls.Editors
         }
         private void ItemsSelector_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            var pos_item = (e.OriginalSource as FrameworkElement)?.DataContext;
-            if (pos_item == null)
+            if ((e.OriginalSource as FrameworkElement)?.DataContext == null)
                 return;
-            if (!ItemsSelector.Items.Contains(pos_item))
+            if (!ItemsSelector.Items.Contains(((FrameworkElement)e.OriginalSource)?.DataContext))
                 return;
-            ItemsSelector.SelectedItem = pos_item;
+            ItemsSelector.SelectedItem = ((FrameworkElement)e.OriginalSource)?.DataContext;
             OnSelectionAdapterCommit();
         }
         private void AutoCompleteTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -375,8 +330,7 @@ namespace WpfControls.Editors
                 return;
             if (FetchTimer == null)
             {
-                FetchTimer = new DispatcherTimer();
-                FetchTimer.Interval = TimeSpan.FromMilliseconds(Delay);
+                FetchTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(Delay) };
                 FetchTimer.Tick += OnFetchTimerTick;
             }
             FetchTimer.IsEnabled = false;
@@ -452,14 +406,7 @@ namespace WpfControls.Editors
         private void OnSelectionAdapterSelectionChanged()
         {
             _isUpdatingText = true;
-            if (ItemsSelector.SelectedItem == null)
-            {
-                Editor.Text = Filter;
-            }
-            else
-            {
-                Editor.Text = GetDisplayText(ItemsSelector.SelectedItem);
-            }
+            Editor.Text = ItemsSelector.SelectedItem == null ? Filter : GetDisplayText(ItemsSelector.SelectedItem);
             Editor.SelectionStart = Editor.Text.Length;
             Editor.SelectionLength = 0;
             ScrollToSelectedItem();
@@ -481,7 +428,7 @@ namespace WpfControls.Editors
 
             #region "Fields"
 
-            private AutoCompleteTextBox _actb;
+            private readonly AutoCompleteTextBox _actb;
 
             private string _filter;
             #endregion
@@ -501,7 +448,7 @@ namespace WpfControls.Editors
             {
                 _filter = searchText;
                 _actb.IsLoading = true;
-                ParameterizedThreadStart thInfo = new ParameterizedThreadStart(GetSuggestionsAsync);
+                ParameterizedThreadStart thInfo = GetSuggestionsAsync;
                 Thread th = new Thread(thInfo);
                 th.Start(new object[] {
                 searchText,
@@ -526,14 +473,15 @@ namespace WpfControls.Editors
 
             private void GetSuggestionsAsync(object param)
             {
-                object[] args = param as object[];
-                string searchText = Convert.ToString(args[0]);
-                ISuggestionProvider provider = args[1] as ISuggestionProvider;
-                IEnumerable list = provider.GetSuggestions(searchText);
-                _actb.Dispatcher.BeginInvoke(new Action<IEnumerable, string>(DisplaySuggestions), DispatcherPriority.Background, new object[] {
-                list,
-                searchText
-            });
+                if (param is object[] args)
+                {
+                    string searchText = Convert.ToString(args[0]);
+                    if (args[1] is ISuggestionProvider provider)
+                    {
+                        IEnumerable list = provider.GetSuggestions(searchText);
+                        _actb.Dispatcher.BeginInvoke(new Action<IEnumerable, string>(DisplaySuggestions), DispatcherPriority.Background, list, searchText);
+                    }
+                }
             }
 
             #endregion
