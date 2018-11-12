@@ -19,6 +19,9 @@
                             <Setter Property="Background"
                                     TargetName="ContentBorder"
                                     Value="{x:Static SystemColors.HighlightBrush}" />
+                            <Setter 
+                                Property="TextElement.Foreground" 
+                                Value="{x:Static SystemColors.HighlightTextBrush}"/>
                             <Setter Property="IsSelected"
                                     Value="True" />
                         </Trigger>
@@ -27,6 +30,9 @@
                             <Setter Property="Background"
                                     TargetName="ContentBorder"
                                     Value="{x:Static SystemColors.HighlightBrush}" />
+                            <Setter 
+                                Property="TextElement.Foreground"
+                                Value="{x:Static SystemColors.HighlightTextBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
