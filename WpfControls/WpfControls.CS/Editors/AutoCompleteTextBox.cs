@@ -81,7 +81,7 @@ namespace WpfControls.Editors
 
         public int MaxLength
         {
-            get => (int)GetValue(DelayProperty);
+            get => (int)GetValue(MaxLengthProperty);
             set => SetValue(MaxLengthProperty, value);
         }
 
