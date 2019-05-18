@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCompleteTextBox", "Auto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCompleteTextBox.Demo", "AutoCompleteTextBox.Demo\AutoCompleteTextBox.Demo.csproj", "{5F52FB10-7085-4668-B6EC-F92272FFF6FC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logo", "Logo", "{C4107B5E-C5F8-4750-A0CF-A529C67CE1DC}"
+	ProjectSection(SolutionItems) = preProject
+		Logo\AutoCompleteTextBox.png = Logo\AutoCompleteTextBox.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

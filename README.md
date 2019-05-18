@@ -30,10 +30,5 @@ It's a simple WPF application using the [Material Design in XAML Toolkit](http:/
 ![demo in action](http://g.recordit.co/xhSXhMkSRP.gif "Demo in Action")
 
 
-PS.: Screen cast by: http://recordit.co/
-
-[![](https://codescene.io/projects/3401/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/3401/jobs/latest-successful/results)
-
-
- 
+PS.: Screen cast by: http://recordit.co/ 
 
