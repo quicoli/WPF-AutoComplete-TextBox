@@ -1,5 +1,8 @@
 # WPF AutoComplete TextBox
 
+![logo](https://github.com/quicoli/WPF-AutoComplete-TextBox/blob/develop/AutoCompleteTextBox/Logo/AutoCompleteTextBox.png?raw=true=32px)
+
+
 >WPF AutoComplete TextBox is an original work from [Bhardwaj Deepak](http://www.codeproject.com/Tips/801004/WPF-AutoComplete-TextBox)
 
 This control originally features:
