@@ -133,7 +133,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WpfControls.CS\AutoCompleteTextBox.csproj">
+    <ProjectReference Include="..\AutoCompleteTextBox\AutoCompleteTextBox.csproj">
       <Project>{bb2abb74-ba58-4812-83aa-ec8171f42df4}</Project>
       <Name>AutoCompleteTextBox</Name>
     </ProjectReference>

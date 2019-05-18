@@ -6,11 +6,11 @@ using System.Windows.Markup;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WpfControls")]
-[assembly: AssemblyDescription("A collection of WPF controls.")]
-[assembly: AssemblyCompany("Deepak Bhardwaj")]
-[assembly: AssemblyProduct("WpfControls")]
-[assembly: AssemblyCopyright("Copyright © Deepak Bhardwaj 2015")]
+[assembly: AssemblyTitle("AutoCompleteTextBox")]
+[assembly: AssemblyDescription("An autocomplete textbox for WPF")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("AutoCompleteTextBox")]
+[assembly: AssemblyCopyright("Copyright © 2019")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
