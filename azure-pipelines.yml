@@ -32,12 +32,15 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
     feedsToUse: 'select'
-    packagesToPack: '**/*.csproj'
-    versioningScheme: 'byBuildNumber'
+    packagesToPack: '**/AutoCompleteTextBox.csproj.csproj'
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: '0'
     includeSymbols: true
 
 
