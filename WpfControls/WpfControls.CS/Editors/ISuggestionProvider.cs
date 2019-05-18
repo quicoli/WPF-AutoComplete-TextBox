@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace WpfControls.Editors
+namespace AutoCompleteTextBox.Editors
 {
     public interface ISuggestionProvider
     {

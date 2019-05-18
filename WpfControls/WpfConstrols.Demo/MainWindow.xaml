@@ -1,12 +1,12 @@
-﻿<Window x:Class="WpfConstrols.Demo.MainWindow"
+﻿<Window x:Class="AutoCompleteTextBox.Demo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfConstrols.Demo"
+        xmlns:local="clr-namespace:AutoCompleteTextBox.Demo"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:providers="clr-namespace:WpfConstrols.Demo.Providers"
-        xmlns:editors="http://wpfcontrols.com/"
+        xmlns:editors1="clr-namespace:AutoCompleteTextBox.Editors;assembly=AutoCompleteTextBox"
+        xmlns:providers="clr-namespace:AutoCompleteTextBox.Demo.Providers"
         mc:Ignorable="d"
         Title="WPF AutoComplete Demo" Height="350" Width="525"
         
@@ -67,7 +67,7 @@
                         DockPanel.Dock="Bottom"           
                         Padding="8">
                 <Border>
-                    <TextBlock FontSize="12" Text="Contact: pauloquicoli@gmail.com"/>
+                    <TextBlock FontSize="12" Text="https://github.com/quicoli/WPF-AutoComplete-TextBox"/>
                 </Border>
             </materialDesign:ColorZone>
 
@@ -85,7 +85,7 @@
 
                     <StackPanel Margin="0,20,0,0" Orientation="Vertical">
                         <TextBlock Foreground="{StaticResource PrimaryHueDarkBrush}">State</TextBlock>
-                        <editors:AutoCompleteTextBox HorizontalAlignment="Left"
+                        <editors1:AutoCompleteTextBox HorizontalAlignment="Left"
                                                  Text=""
                                                  Style="{StaticResource MaterialAutoCompleteTextBox}"
                                                  MaxLength="50"                         
@@ -95,14 +95,14 @@
                                                  Width="450"
                                                  Provider="{StaticResource ResourceKey=StateSuggestionProvider}"
                                                  ItemTemplate="{StaticResource ResourceKey=StateTemplate}">
-                            <editors:AutoCompleteTextBox.SelectedItem>
+                            <editors1:AutoCompleteTextBox.SelectedItem>
                                 <Binding Path="SelectedState" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                                 </Binding>
-                            </editors:AutoCompleteTextBox.SelectedItem>
-                            <editors:AutoCompleteTextBox.LoadingContent>
+                            </editors1:AutoCompleteTextBox.SelectedItem>
+                            <editors1:AutoCompleteTextBox.LoadingContent>
                                 <TextBlock Text="Loading..." Margin="5" FontSize="14" />
-                            </editors:AutoCompleteTextBox.LoadingContent>
-                        </editors:AutoCompleteTextBox>
+                            </editors1:AutoCompleteTextBox.LoadingContent>
+                        </editors1:AutoCompleteTextBox>
 
                     </StackPanel>
 

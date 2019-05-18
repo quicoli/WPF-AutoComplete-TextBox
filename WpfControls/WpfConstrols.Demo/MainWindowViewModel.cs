@@ -1,7 +1,7 @@
-﻿using JulMar.Windows.Validations;
-using WpfConstrols.Demo.Model;
+﻿using AutoCompleteTextBox.Demo.Model;
+using JulMar.Windows.Validations;
 
-namespace WpfConstrols.Demo
+namespace AutoCompleteTextBox.Demo
 {
     public class MainWindowViewModel: ValidatingViewModel
     {

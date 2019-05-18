@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using WpfConstrols.Demo.Model;
-using WpfControls.Editors;
+using AutoCompleteTextBox.Demo.Model;
+using AutoCompleteTextBox.Editors;
 
-namespace WpfConstrols.Demo.Providers
+namespace AutoCompleteTextBox.Demo.Providers
 {
     
         public class StateSuggestionProvider : ISuggestionProvider

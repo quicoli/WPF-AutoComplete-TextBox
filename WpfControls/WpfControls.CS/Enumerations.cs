@@ -1,4 +1,4 @@
-﻿namespace WpfControls
+﻿namespace AutoCompleteTextBox
 {
     public enum IconPlacement
     {

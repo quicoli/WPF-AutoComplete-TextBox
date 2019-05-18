@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace WpfConstrols.Demo
+namespace AutoCompleteTextBox.Demo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

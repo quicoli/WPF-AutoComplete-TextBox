@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Data;
 
-namespace WpfControls
+namespace AutoCompleteTextBox
 {
     public class BindingEvaluator : FrameworkElement
     {

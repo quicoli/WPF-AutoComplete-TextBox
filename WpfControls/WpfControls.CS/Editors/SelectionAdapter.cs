@@ -2,7 +2,7 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
-namespace WpfControls.Editors
+namespace AutoCompleteTextBox.Editors
 {
     public class SelectionAdapter
     {

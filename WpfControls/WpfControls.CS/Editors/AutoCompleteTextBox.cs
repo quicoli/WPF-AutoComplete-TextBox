@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace WpfControls.Editors
+namespace AutoCompleteTextBox.Editors
 {
     [TemplatePart(Name = PartEditor, Type = typeof(TextBox))]
     [TemplatePart(Name = PartPopup, Type = typeof(Popup))]

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WpfConstrols.Demo
+namespace AutoCompleteTextBox.Demo
 {
     /// <summary>
     /// Interaction logic for App.xaml

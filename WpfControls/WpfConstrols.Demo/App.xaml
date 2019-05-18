@@ -1,7 +1,7 @@
-﻿<Application x:Class="WpfConstrols.Demo.App"
+﻿<Application x:Class="AutoCompleteTextBox.Demo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WpfConstrols.Demo"
+             xmlns:local="clr-namespace:AutoCompleteTextBox.Demo"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

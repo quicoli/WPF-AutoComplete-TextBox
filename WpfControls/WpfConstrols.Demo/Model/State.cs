@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace WpfConstrols.Demo.Model
+namespace AutoCompleteTextBox.Demo.Model
 {
     public class State
     {
