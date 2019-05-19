@@ -31,14 +31,3 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'pack'
-    feedsToUse: 'select'
-    packagesToPack: '**/AutoCompleteTextBox.csproj.csproj'
-    versioningScheme: 'byBuildNumber'
-
-
-
-
