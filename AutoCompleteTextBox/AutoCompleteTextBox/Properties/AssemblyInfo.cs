@@ -49,5 +49,5 @@ using System.Windows.Markup;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.8")]
 [assembly: AssemblyFileVersion("1.0.0.8")]
-[assembly: XmlnsDefinition("http://wpfcontrols.com/", "WpfControls")] 
-[assembly: XmlnsDefinition("http://wpfcontrols.com/", "WpfControls.Editors")] 
+[assembly: XmlnsDefinition("http://wpfcontrols.com/", "AutoCompleteTextBox")] 
+[assembly: XmlnsDefinition("http://wpfcontrols.com/", "AutoCompleteTextBox.Editors")] 
