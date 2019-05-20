@@ -1,5 +1,8 @@
 # WPF AutoComplete TextBox
 
+![logo](https://github.com/quicoli/WPF-AutoComplete-TextBox/blob/develop/AutoCompleteTextBox/Logo/AutoCompleteTextBox.png?raw=true=32px)
+
+
 >WPF AutoComplete TextBox is an original work from [Bhardwaj Deepak](http://www.codeproject.com/Tips/801004/WPF-AutoComplete-TextBox)
 
 This control originally features:
@@ -30,10 +33,5 @@ It's a simple WPF application using the [Material Design in XAML Toolkit](http:/
 ![demo in action](http://g.recordit.co/xhSXhMkSRP.gif "Demo in Action")
 
 
-PS.: Screen cast by: http://recordit.co/
-
-[![](https://codescene.io/projects/3401/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/3401/jobs/latest-successful/results)
-
-
- 
+PS.: Screen cast by: http://recordit.co/ 
 
