@@ -338,9 +338,6 @@ namespace AutoCompleteTextBox.Editors
             SetSelectedItem(null);
             if (Editor.Text.Length > 0)
             {
-                IsLoading = true;
-                IsDropDownOpen = true;
-                ItemsSelector.ItemsSource = null;
                 FetchTimer.IsEnabled = true;
                 FetchTimer.Start();
             }
@@ -448,6 +445,8 @@ namespace AutoCompleteTextBox.Editors
             {
                 _filter = searchText;
                 _actb.IsLoading = true;
+                _actb.IsDropDownOpen = true;
+                _actb.ItemsSelector.ItemsSource = null;
                 ParameterizedThreadStart thInfo = GetSuggestionsAsync;
                 Thread th = new Thread(thInfo);
                 th.Start(new object[] {
