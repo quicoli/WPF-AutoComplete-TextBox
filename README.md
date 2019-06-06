@@ -2,6 +2,11 @@
 
 ![logo](https://github.com/quicoli/WPF-AutoComplete-TextBox/blob/develop/AutoCompleteTextBox/Logo/AutoCompleteTextBox.png?raw=true=32px)
 
+NuGet package: [AutoCompleteTextBox](https://www.nuget.org/packages/AutoCompleteTextBox/)
+
+Install:
+```PM> Install-Package AutoCompleteTextBox -Version 1.0.0```
+
 
 >WPF AutoComplete TextBox is an original work from [Bhardwaj Deepak](http://www.codeproject.com/Tips/801004/WPF-AutoComplete-TextBox)
 
