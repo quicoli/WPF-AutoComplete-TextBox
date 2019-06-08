@@ -5,7 +5,7 @@
 NuGet package: [AutoCompleteTextBox](https://www.nuget.org/packages/AutoCompleteTextBox/)
 
 Install:
-```PM> Install-Package AutoCompleteTextBox -Version 1.0.0```
+```PM> Install-Package AutoCompleteTextBox -Version 1.0.1```
 
 
 >WPF AutoComplete TextBox is an original work from [Bhardwaj Deepak](http://www.codeproject.com/Tips/801004/WPF-AutoComplete-TextBox)
