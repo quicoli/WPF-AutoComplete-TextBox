@@ -2,7 +2,7 @@
 
 ![logo](https://github.com/quicoli/WPF-AutoComplete-TextBox/blob/develop/AutoCompleteTextBox/Logo/AutoCompleteTextBox.png?raw=true=32px)
 
-NuGet package: [AutoCompleteTextBox](https://www.nuget.org/packages/AutoCompleteTextBox/)
+![shield](https://img.shields.io/nuget/v/AutoCompleteTextBox.svg)
 
 Install:
 ```PM> Install-Package AutoCompleteTextBox -Version 1.0.1```
