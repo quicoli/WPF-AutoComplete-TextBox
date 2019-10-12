@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFrameworks>net452;net472;netcoreapp3.0</TargetFrameworks>
+    <UseWPF>true</UseWPF>
     <Version>1.0.1.0</Version>
     <PackageProjectUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</PackageProjectUrl>
     <RepositoryType />
@@ -13,18 +14,6 @@
     <ApplicationIcon>AutoCompleteTextBox.ico</ApplicationIcon>
     <PackageReleaseNotes>Fixes</PackageReleaseNotes>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Editors\Themes\Generic.xaml" />
-    <None Remove="Themes\Generic.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\WindowsBase.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <Page Include="Editors\Themes\Generic.xaml" />
     <Page Include="Themes\Generic.xaml" />
