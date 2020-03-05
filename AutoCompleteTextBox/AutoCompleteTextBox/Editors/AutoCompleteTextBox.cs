@@ -37,6 +37,7 @@ namespace AutoCompleteTextBox.Editors
         public static readonly DependencyProperty ProviderProperty = DependencyProperty.Register("Provider", typeof(ISuggestionProvider), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null, OnSelectedItemChanged));
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
         public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register("MaxLength", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(0));
         public static readonly DependencyProperty CharacterCasingProperty = DependencyProperty.Register("CharacterCasing", typeof(CharacterCasing), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(CharacterCasing.Normal));
         public static readonly DependencyProperty MaxPopUpHeightProperty = DependencyProperty.Register("MaxPopUpHeight", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(600));
@@ -103,7 +104,12 @@ namespace AutoCompleteTextBox.Editors
 
         public DispatcherTimer FetchTimer { get; set; }
 
-        public string Filter { get; set; }
+        public string Filter
+        {
+            get => (string)GetValue(FilterProperty);
+
+            set => SetValue(FilterProperty, value);
+        }
 
         public object Icon
         {
@@ -327,6 +333,7 @@ namespace AutoCompleteTextBox.Editors
 
         private void OnEditorTextChanged(object sender, TextChangedEventArgs e)
         {
+            Text = Editor.Text;
             if (_isUpdatingText)
                 return;
             if (FetchTimer == null)
