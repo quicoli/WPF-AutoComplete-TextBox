@@ -62,6 +62,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MVVMHelpers.2012.4.20.03\lib\4.5\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -84,7 +85,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\WebColor.cs" />
+    <Compile Include="Model\WebColorComparer.cs" />
+    <Compile Include="Model\WebColorsFactory.cs" />
     <Compile Include="Providers\StateSuggestionProvider.cs" />
+    <Compile Include="Providers\WebColorsSuggestionProvider.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
