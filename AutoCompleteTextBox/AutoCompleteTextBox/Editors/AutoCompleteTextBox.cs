@@ -445,14 +445,13 @@ namespace AutoCompleteTextBox.Editors
             {
                 _filter = searchText;
                 _actb.IsLoading = true;
-                _actb.IsDropDownOpen = true;
+                // Do not open drop down if control is not focused
+                if (_actb.IsKeyboardFocusWithin)
+                    _actb.IsDropDownOpen = true;
                 _actb.ItemsSelector.ItemsSource = null;
                 ParameterizedThreadStart thInfo = GetSuggestionsAsync;
                 Thread th = new Thread(thInfo);
-                th.Start(new object[] {
-                searchText,
-                _actb.Provider
-            });
+                th.Start(new object[] { searchText, _actb.Provider });
             }
 
             private void DisplaySuggestions(IEnumerable suggestions, string filter)
@@ -461,13 +460,13 @@ namespace AutoCompleteTextBox.Editors
                 {
                     return;
                 }
+                _actb.IsLoading = false;
+                _actb.ItemsSelector.ItemsSource = suggestions;
+                // Close drop down if there are no items
                 if (_actb.IsDropDownOpen)
                 {
-                    _actb.IsLoading = false;
-                    _actb.ItemsSelector.ItemsSource = suggestions;
                     _actb.IsDropDownOpen = _actb.ItemsSelector.HasItems;
                 }
-
             }
 
             private void GetSuggestionsAsync(object param)
