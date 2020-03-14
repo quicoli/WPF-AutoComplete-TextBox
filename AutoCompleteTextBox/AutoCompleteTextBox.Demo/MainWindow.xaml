@@ -87,7 +87,7 @@
                         <TextBlock Foreground="{StaticResource PrimaryHueDarkBrush}">State</TextBlock>
                         <editors1:AutoCompleteTextBox HorizontalAlignment="Left"
                                                  Text=""
-                                                 Style="{StaticResource MaterialAutoCompleteTextBox}"
+                                                 
                                                  MaxLength="50"                         
                                                  CharacterCasing="Upper"
                                                  DisplayMember="Name"

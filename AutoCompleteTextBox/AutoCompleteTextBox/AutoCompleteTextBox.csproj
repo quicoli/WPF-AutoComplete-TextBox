@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFramework>net452</TargetFramework>
-    <Version>1.0.1.0</Version>
+    <TargetFrameworks>net452;net472;netcoreapp3.1</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <Version>1.1.0.0</Version>
     <PackageProjectUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</PackageProjectUrl>
     <RepositoryType />
     <RepositoryUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</RepositoryUrl>
@@ -11,14 +12,9 @@
     <PackageIconUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox/blob/develop/AutoCompleteTextBox/Logo/AutoCompleteTextBox.ico?raw=true</PackageIconUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ApplicationIcon>AutoCompleteTextBox.ico</ApplicationIcon>
-    <PackageReleaseNotes>Fixes</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      Now package targets .net 4.5.2, 4.7.2 and .net core 3.1.
+      Default style is now enbled by default.
+    </PackageReleaseNotes>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\WindowsBase.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 </Project>
