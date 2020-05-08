@@ -64,7 +64,10 @@ namespace AutoCompleteTextBox.Editors
                     Commit?.Invoke();
 
                     break;
+                default:
+                    return;
             }
+            key.Handled = true;
         }
 
         private void DecrementSelection()
@@ -98,6 +101,7 @@ namespace AutoCompleteTextBox.Editors
         private void OnSelectorMouseDown(object sender, MouseButtonEventArgs e)
         {
             Commit?.Invoke();
+            e.Handled = true;
         }
 
         #endregion
