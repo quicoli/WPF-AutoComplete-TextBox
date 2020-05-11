@@ -43,7 +43,7 @@ namespace AutoCompleteTextBox.Editors
 
         public void HandleKeyDown(KeyEventArgs key)
         {
-            Debug.WriteLine(key.Key);
+            //Debug.WriteLine(key.Key);
             switch (key.Key)
             {
                 case Key.Down:
