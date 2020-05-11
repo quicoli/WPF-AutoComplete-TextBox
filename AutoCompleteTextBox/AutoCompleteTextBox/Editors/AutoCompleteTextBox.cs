@@ -282,6 +282,7 @@ namespace AutoCompleteTextBox.Editors
                 return;
             ItemsSelector.SelectedItem = ((FrameworkElement)e.OriginalSource)?.DataContext;
             OnSelectionAdapterCommit();
+            e.Handled = true;
         }
         private void AutoCompleteTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
