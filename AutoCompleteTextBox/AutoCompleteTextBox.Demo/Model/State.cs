@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AutoCompleteTextBox.Demo.Model
 {
-    [DebuggerDisplay("State = {Name} ({Abbreviations})")]
+    [DebuggerDisplay("State = {Name} ({Abbreviation})")]
     public class State
     {
         public string Name { get; set; }
