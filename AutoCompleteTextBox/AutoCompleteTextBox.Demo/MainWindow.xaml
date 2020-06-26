@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:scm="clr-namespace:System;assembly=System"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:AutoCompleteTextBox.Demo"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:acb="http://wpfcontrols.com/"
@@ -24,6 +26,9 @@
         WindowStyle="None">
 
     <Window.Resources>
+        <sys:String x:Key="RepositoryUrl">https://github.com/quicoli/WPF-AutoComplete-TextBox</sys:String>
+        <scm:Uri x:Key="RepositoryUri">https://github.com/quicoli/WPF-AutoComplete-TextBox</scm:Uri>
+
         <TextBlock x:Key="LoadingContent" Text="Loading..." Margin="5" FontSize="14" />
 
         <providers:StateSuggestionProvider x:Key="StateSuggestionProvider"/>
@@ -83,7 +88,12 @@
                         DockPanel.Dock="Bottom"
                         Padding="8">
                 <Border>
-                    <TextBlock FontSize="12" Text="https://github.com/quicoli/WPF-AutoComplete-TextBox"/>
+                    <TextBlock FontSize="12">
+                        <Hyperlink NavigateUri="{StaticResource RepositoryUri}"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            <Run Text="{StaticResource RepositoryUrl}"/>
+                        </Hyperlink>
+                    </TextBlock>
                 </Border>
             </materialDesign:ColorZone>
 
