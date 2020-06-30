@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AutoCompleteTextBox.Demo.Styles"
                     xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
-                    xmlns:editors1="clr-namespace:AutoCompleteTextBox.Editors;assembly=AutoCompleteTextBox">
+                    xmlns:acb="http://wpfcontrols.com/">
 
     <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
     <converters:TextFieldHintVisibilityConverter x:Key="TextFieldHintVisibilityConverter" />
@@ -132,7 +132,7 @@
     </Style>
 
 
-    <Style x:Key="MaterialAutoCompleteTextBox" TargetType="editors1:AutoCompleteTextBox" >
+    <Style x:Key="MaterialAutoCompleteTextBox" TargetType="acb:AutoCompleteTextBox" >
         <Setter Property="Focusable" Value="True" />
         <Setter Property="BorderThickness" Value="0 0 0 1"/>
         <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
@@ -147,7 +147,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource MaterialDesignValidationErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type editors1:AutoCompleteTextBox}">
+                <ControlTemplate TargetType="{x:Type acb:AutoCompleteTextBox}">
                     <Grid>
                         <DockPanel>
                             <ContentPresenter ContentSource="Icon"

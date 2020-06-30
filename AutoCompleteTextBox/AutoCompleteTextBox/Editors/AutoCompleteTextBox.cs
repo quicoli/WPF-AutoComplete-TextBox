@@ -37,6 +37,7 @@ namespace AutoCompleteTextBox.Editors
         public static readonly DependencyProperty ProviderProperty = DependencyProperty.Register("Provider", typeof(ISuggestionProvider), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null, OnSelectedItemChanged));
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
         public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register("MaxLength", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(0));
         public static readonly DependencyProperty CharacterCasingProperty = DependencyProperty.Register("CharacterCasing", typeof(CharacterCasing), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(CharacterCasing.Normal));
         public static readonly DependencyProperty MaxPopUpHeightProperty = DependencyProperty.Register("MaxPopUpHeight", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(600));
@@ -103,7 +104,12 @@ namespace AutoCompleteTextBox.Editors
 
         public DispatcherTimer FetchTimer { get; set; }
 
-        public string Filter { get; set; }
+        public string Filter
+        {
+            get => (string)GetValue(FilterProperty);
+
+            set => SetValue(FilterProperty, value);
+        }
 
         public object Icon
         {
@@ -327,6 +333,7 @@ namespace AutoCompleteTextBox.Editors
 
         private void OnEditorTextChanged(object sender, TextChangedEventArgs e)
         {
+            Text = Editor.Text;
             if (_isUpdatingText)
                 return;
             if (FetchTimer == null)
@@ -446,14 +453,13 @@ namespace AutoCompleteTextBox.Editors
             {
                 _filter = searchText;
                 _actb.IsLoading = true;
-                _actb.IsDropDownOpen = true;
+                // Do not open drop down if control is not focused
+                if (_actb.IsKeyboardFocusWithin)
+                    _actb.IsDropDownOpen = true;
                 _actb.ItemsSelector.ItemsSource = null;
                 ParameterizedThreadStart thInfo = GetSuggestionsAsync;
                 Thread th = new Thread(thInfo);
-                th.Start(new object[] {
-                searchText,
-                _actb.Provider
-            });
+                th.Start(new object[] { searchText, _actb.Provider });
             }
 
             private void DisplaySuggestions(IEnumerable suggestions, string filter)
@@ -462,13 +468,13 @@ namespace AutoCompleteTextBox.Editors
                 {
                     return;
                 }
+                _actb.IsLoading = false;
+                _actb.ItemsSelector.ItemsSource = suggestions;
+                // Close drop down if there are no items
                 if (_actb.IsDropDownOpen)
                 {
-                    _actb.IsLoading = false;
-                    _actb.ItemsSelector.ItemsSource = suggestions;
                     _actb.IsDropDownOpen = _actb.ItemsSelector.HasItems;
                 }
-
             }
 
             private void GetSuggestionsAsync(object param)
