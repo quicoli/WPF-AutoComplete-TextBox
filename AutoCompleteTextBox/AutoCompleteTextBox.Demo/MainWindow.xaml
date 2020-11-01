@@ -117,8 +117,8 @@
 
                     <StackPanel Margin="0,20,0,0" Orientation="Vertical">
                         <TextBlock Foreground="{StaticResource PrimaryHueDarkBrush}">State</TextBlock>
-                        <acb:AutoCompleteTextBox HorizontalAlignment="Stretch"
-                                                 Style="{StaticResource MaterialAutoCompleteTextBox}"
+                        <acb:AutoCompleteComboBox HorizontalAlignment="Stretch"
+                                                 Style="{StaticResource MaterialAutoCompleteComboBox}"
                                                  MaxLength="50"
                                                  CharacterCasing="Upper"
                                                  DisplayMember="Name"
@@ -129,7 +129,7 @@
                                                  LoadingContent="{StaticResource LoadingContent}"
                                                  SelectedItem="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                                  Watermark="Select a state">
-                        </acb:AutoCompleteTextBox>
+                        </acb:AutoCompleteComboBox>
 
                     </StackPanel>
 

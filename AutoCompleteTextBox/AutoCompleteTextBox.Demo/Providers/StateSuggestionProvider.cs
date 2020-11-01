@@ -7,7 +7,7 @@ using AutoCompleteTextBox.Editors;
 
 namespace AutoCompleteTextBox.Demo.Providers
 {
-    public class StateSuggestionProvider : ISuggestionProvider
+    public class StateSuggestionProvider : IComboSuggestionProvider
     {
         public IEnumerable<State> ListOfStates { get; set; }
 
@@ -29,9 +29,13 @@ namespace AutoCompleteTextBox.Demo.Providers
                     .ToList();
         }
 
-        IEnumerable ISuggestionProvider.GetSuggestions(string filter)
+        IEnumerable IComboSuggestionProvider.GetSuggestions(string filter)
         {
             return GetSuggestions(filter);
+        }
+        IEnumerable IComboSuggestionProvider.GetFullCollection()
+        {
+            return ListOfStates.ToList();
         }
 
         public StateSuggestionProvider()
