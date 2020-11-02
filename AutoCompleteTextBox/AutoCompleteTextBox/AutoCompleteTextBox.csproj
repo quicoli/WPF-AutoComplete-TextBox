@@ -4,7 +4,7 @@
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <TargetFrameworks>net452;net472;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <Version>1.1.0.0</Version>
+    <Version>1.1.0.1</Version>
     <PackageProjectUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</PackageProjectUrl>
     <RepositoryType />
     <RepositoryUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</RepositoryUrl>
