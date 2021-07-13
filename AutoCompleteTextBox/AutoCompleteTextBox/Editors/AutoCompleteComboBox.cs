@@ -14,7 +14,8 @@ namespace AutoCompleteTextBox.Editors
     [TemplatePart(Name = PartEditor, Type = typeof(TextBox))]
     [TemplatePart(Name = PartPopup, Type = typeof(Popup))]
     [TemplatePart(Name = PartSelector, Type = typeof(Selector))]
-    public class AutoCompleteTextBox : Control
+    [TemplatePart(Name = PartExpander, Type = typeof(Expander))]
+    public class AutoCompleteComboBox : Control
     {
 
         #region "Fields"
@@ -23,28 +24,29 @@ namespace AutoCompleteTextBox.Editors
         public const string PartPopup = "PART_Popup";
 
         public const string PartSelector = "PART_Selector";
-        public static readonly DependencyProperty DelayProperty = DependencyProperty.Register("Delay", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(200));
-        public static readonly DependencyProperty DisplayMemberProperty = DependencyProperty.Register("DisplayMember", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
-        public static readonly DependencyProperty IconPlacementProperty = DependencyProperty.Register("IconPlacement", typeof(IconPlacement), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(IconPlacement.Left));
-        public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(object), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty IconVisibilityProperty = DependencyProperty.Register("IconVisibility", typeof(Visibility), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(Visibility.Visible));
-        public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(false));
-        public static readonly DependencyProperty IsLoadingProperty = DependencyProperty.Register("IsLoading", typeof(bool), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(false));
-        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(false));
-        public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty ItemTemplateSelectorProperty = DependencyProperty.Register("ItemTemplateSelector", typeof(DataTemplateSelector), typeof(AutoCompleteTextBox));
-        public static readonly DependencyProperty LoadingContentProperty = DependencyProperty.Register("LoadingContent", typeof(object), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty ProviderProperty = DependencyProperty.Register("Provider", typeof(ISuggestionProvider), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
-        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null, OnSelectedItemChanged));
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
-        public static readonly DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
-        public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register("MaxLength", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(0));
-        public static readonly DependencyProperty CharacterCasingProperty = DependencyProperty.Register("CharacterCasing", typeof(CharacterCasing), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(CharacterCasing.Normal));
-        public static readonly DependencyProperty MaxPopUpHeightProperty = DependencyProperty.Register("MaxPopUpHeight", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(600));
+        public const string PartExpander = "PART_Expander";
+        public static readonly DependencyProperty DelayProperty = DependencyProperty.Register("Delay", typeof(int), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(200));
+        public static readonly DependencyProperty DisplayMemberProperty = DependencyProperty.Register("DisplayMember", typeof(string), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty IconPlacementProperty = DependencyProperty.Register("IconPlacement", typeof(IconPlacement), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(IconPlacement.Left));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(object), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty IconVisibilityProperty = DependencyProperty.Register("IconVisibility", typeof(Visibility), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty IsLoadingProperty = DependencyProperty.Register("IsLoading", typeof(bool), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register("IsReadOnly", typeof(bool), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty ItemTemplateSelectorProperty = DependencyProperty.Register("ItemTemplateSelector", typeof(DataTemplateSelector), typeof(AutoCompleteComboBox));
+        public static readonly DependencyProperty LoadingContentProperty = DependencyProperty.Register("LoadingContent", typeof(object), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty ProviderProperty = DependencyProperty.Register("Provider", typeof(IComboSuggestionProvider), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(null, OnSelectedItemChanged));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register("MaxLength", typeof(int), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(0));
+        public static readonly DependencyProperty CharacterCasingProperty = DependencyProperty.Register("CharacterCasing", typeof(CharacterCasing), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(CharacterCasing.Normal));
+        public static readonly DependencyProperty MaxPopUpHeightProperty = DependencyProperty.Register("MaxPopUpHeight", typeof(int), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(600));
 
-        public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(string.Empty));
 
-        public static readonly DependencyProperty SuggestionBackgroundProperty = DependencyProperty.Register("SuggestionBackground", typeof(Brush), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(Brushes.White));
+        public static readonly DependencyProperty SuggestionBackgroundProperty = DependencyProperty.Register("SuggestionBackground", typeof(Brush), typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(Brushes.White));
         private bool _isUpdatingText;
         private bool _selectionCancelled;
 
@@ -55,9 +57,9 @@ namespace AutoCompleteTextBox.Editors
 
         #region "Constructors"
 
-        static AutoCompleteTextBox()
+        static AutoCompleteComboBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(typeof(AutoCompleteTextBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(AutoCompleteComboBox), new FrameworkPropertyMetadata(typeof(AutoCompleteComboBox)));
         }
 
         #endregion
@@ -101,6 +103,7 @@ namespace AutoCompleteTextBox.Editors
         }
 
         public TextBox Editor { get; set; }
+        public Expander Expander { get; set; }
 
         public DispatcherTimer FetchTimer { get; set; }
 
@@ -136,7 +139,11 @@ namespace AutoCompleteTextBox.Editors
         {
             get => (bool)GetValue(IsDropDownOpenProperty);
 
-            set => SetValue(IsDropDownOpenProperty, value);
+            set
+            {
+                this.Expander.IsExpanded = value;
+                SetValue(IsDropDownOpenProperty, value);
+            }
         }
 
         public bool IsLoading
@@ -177,9 +184,9 @@ namespace AutoCompleteTextBox.Editors
 
         public Popup Popup { get; set; }
 
-        public ISuggestionProvider Provider
+        public IComboSuggestionProvider Provider
         {
-            get => (ISuggestionProvider)GetValue(ProviderProperty);
+            get => (IComboSuggestionProvider)GetValue(ProviderProperty);
 
             set => SetValue(ProviderProperty, value);
         }
@@ -219,8 +226,8 @@ namespace AutoCompleteTextBox.Editors
 
         public static void OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            AutoCompleteTextBox act = null;
-            act = d as AutoCompleteTextBox;
+            AutoCompleteComboBox act = null;
+            act = d as AutoCompleteComboBox;
             if (act != null)
             {
                 if (act.Editor != null & !act._isUpdatingText)
@@ -246,6 +253,8 @@ namespace AutoCompleteTextBox.Editors
             Editor = Template.FindName(PartEditor, this) as TextBox;
             Popup = Template.FindName(PartPopup, this) as Popup;
             ItemsSelector = Template.FindName(PartSelector, this) as Selector;
+            Expander = Template.FindName(PartExpander, this) as Expander;
+
             BindingEvaluator = new BindingEvaluator(new Binding(DisplayMember));
 
             if (Editor != null)
@@ -262,8 +271,14 @@ namespace AutoCompleteTextBox.Editors
                 }
 
             }
+            if (Expander != null)
+            {
+                Expander.IsExpanded = false;
+                Expander.Collapsed += Expander_Expanded;
+                Expander.Expanded += Expander_Expanded;
+            }
 
-            GotFocus += AutoCompleteTextBox_GotFocus;
+            GotFocus += AutoCompleteComboBox_GotFocus;
 
             if (Popup != null)
             {
@@ -280,6 +295,22 @@ namespace AutoCompleteTextBox.Editors
                 ItemsSelector.PreviewMouseDown += ItemsSelector_PreviewMouseDown;
             }
         }
+
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            this.IsDropDownOpen = Expander.IsExpanded;
+            if (!this.IsDropDownOpen)
+            {
+                return;
+            }
+            if (_suggestionsAdapter == null)
+            {
+                _suggestionsAdapter = new SuggestionsAdapter(this);
+            }
+            _suggestionsAdapter.ShowFullCollection();
+
+        }
+
         private void ItemsSelector_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if ((e.OriginalSource as FrameworkElement)?.DataContext == null)
@@ -290,7 +321,7 @@ namespace AutoCompleteTextBox.Editors
             OnSelectionAdapterCommit();
             e.Handled = true;
         }
-        private void AutoCompleteTextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void AutoCompleteComboBox_GotFocus(object sender, RoutedEventArgs e)
         {
             Editor?.Focus();
         }
@@ -433,14 +464,14 @@ namespace AutoCompleteTextBox.Editors
 
             #region "Fields"
 
-            private readonly AutoCompleteTextBox _actb;
+            private readonly AutoCompleteComboBox _actb;
 
             private string _filter;
             #endregion
 
             #region "Constructors"
 
-            public SuggestionsAdapter(AutoCompleteTextBox actb)
+            public SuggestionsAdapter(AutoCompleteComboBox actb)
             {
                 _actb = actb;
             }
@@ -460,6 +491,18 @@ namespace AutoCompleteTextBox.Editors
                 ParameterizedThreadStart thInfo = GetSuggestionsAsync;
                 Thread th = new Thread(thInfo);
                 th.Start(new object[] { searchText, _actb.Provider });
+            }
+            public void ShowFullCollection()
+            {
+                _filter = string.Empty;
+                _actb.IsLoading = true;
+                // Do not open drop down if control is not focused
+                if (_actb.IsKeyboardFocusWithin)
+                    _actb.IsDropDownOpen = true;
+                _actb.ItemsSelector.ItemsSource = null;
+                ParameterizedThreadStart thInfo = GetFullCollectionAsync;
+                Thread th = new Thread(thInfo);
+                th.Start(_actb.Provider);
             }
 
             private void DisplaySuggestions(IEnumerable suggestions, string filter)
@@ -482,12 +525,21 @@ namespace AutoCompleteTextBox.Editors
                 if (param is object[] args)
                 {
                     string searchText = Convert.ToString(args[0]);
-                    if (args[1] is ISuggestionProvider provider)
+                    if (args[1] is IComboSuggestionProvider provider)
                     {
                         IEnumerable list = provider.GetSuggestions(searchText);
                         _actb.Dispatcher.BeginInvoke(new Action<IEnumerable, string>(DisplaySuggestions), DispatcherPriority.Background, list, searchText);
                     }
                 }
+            }
+            private void GetFullCollectionAsync(object param)
+            {
+                if (param is IComboSuggestionProvider provider)
+                {
+                    IEnumerable list = provider.GetFullCollection();
+                    _actb.Dispatcher.BeginInvoke(new Action<IEnumerable, string>(DisplaySuggestions), DispatcherPriority.Background, list, string.Empty);
+                }
+
             }
 
             #endregion

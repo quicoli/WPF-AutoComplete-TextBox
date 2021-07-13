@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AutoCompleteTextBox.Demo.Styles"
                     xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
-                    xmlns:editors1="clr-namespace:AutoCompleteTextBox.Editors;assembly=AutoCompleteTextBox">
+                    xmlns:acb="http://wpfcontrols.com/">
 
     <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
     <converters:TextFieldHintVisibilityConverter x:Key="TextFieldHintVisibilityConverter" />
@@ -132,7 +132,7 @@
     </Style>
 
 
-    <Style x:Key="MaterialAutoCompleteTextBox" TargetType="editors1:AutoCompleteTextBox" >
+    <Style x:Key="MaterialAutoCompleteTextBox" TargetType="acb:AutoCompleteTextBox" >
         <Setter Property="Focusable" Value="True" />
         <Setter Property="BorderThickness" Value="0 0 0 1"/>
         <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
@@ -147,7 +147,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource MaterialDesignValidationErrorTemplate}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type editors1:AutoCompleteTextBox}">
+                <ControlTemplate TargetType="{x:Type acb:AutoCompleteTextBox}">
                     <Grid>
                         <DockPanel>
                             <ContentPresenter ContentSource="Icon"
@@ -236,6 +236,110 @@
         </Setter>
     </Style>
 
+    <Style x:Key="MaterialAutoCompleteComboBox" TargetType="acb:AutoCompleteComboBox" >
+        <Setter Property="Focusable" Value="True" />
+        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextBoxBorder}" />
+        <Setter Property="Background" Value="Transparent"/>
+        <!--<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>-->
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource MaterialDesignValidationErrorTemplate}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type acb:AutoCompleteComboBox}">
+                    <Grid>
+                        <DockPanel>
+                            <ContentPresenter ContentSource="Icon"
+                                                  x:Name="PART_Icon"
+                                                  Visibility="{TemplateBinding IconVisibility}" />
+                            <Grid>
+                                <TextBlock DockPanel.Dock="Left" x:Name="PART_Watermark"
+                                               Text="{TemplateBinding Watermark}"
+                                               Visibility="Collapsed"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Focusable="False"
+                                               Foreground="Gray"/>
+                                    <DockPanel Margin="3,0">
+                                    <Expander DockPanel.Dock="Right" x:Name="PART_Expander"/>
+                                    <TextBox x:Name="PART_Editor"
+                                             Focusable="True"
+                                             HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Center"
+                                             Style="{StaticResource ResourceKey=MaterialDesignTextBox}"
+                                             MaxLength="{Binding Path=MaxLength, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                             CharacterCasing="{Binding Path=CharacterCasing, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                             Text="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
+                                </DockPanel>
+                            </Grid>
+                        </DockPanel>
+                        <Popup x:Name="PART_Popup"
+                                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
+                                   Width="{TemplateBinding ActualWidth}"
+                                   HorizontalOffset="0"
+                                   MinHeight="25"
+                                   MaxHeight="600"
+                                   AllowsTransparency="True"
+                                   PopupAnimation="Slide"
+                                   Focusable="False">
+                            <Border Background="White"
+                                        BorderThickness="1"
+                                        BorderBrush="Gray"
+                                        CornerRadius="5"
+                                        Padding="2">
+                                <Grid>
+                                    <ListBox x:Name="PART_Selector"
+                                                 ItemTemplate="{TemplateBinding ItemTemplate}"
+                                                 ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                 Focusable="False"
+                                                 BorderThickness="0"
+                                                 MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent},Mode=TwoWay}"
+                                                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                >
+                                    </ListBox>
+                                    <Border Visibility="{Binding Path=IsLoading, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource   ResourceKey=BoolToVisConverter}}">
+                                        <ContentPresenter ContentSource="LoadingContent"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Popup>
 
+                    </Grid>
+                    <!--</Border>-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text"
+                                 Value=""
+                                 SourceName="PART_Editor">
+                            <Setter Property="Visibility"
+                                    Value="Visible"
+                                    TargetName="PART_Watermark" />
+                        </Trigger>
+                        <Trigger Property="IconPlacement"
+                                 Value="Left">
+                            <Setter Property="DockPanel.Dock"
+                                    Value="Left"
+                                    TargetName="PART_Icon" />
+                        </Trigger>
+                        <Trigger Property="IconPlacement"
+                                 Value="Right">
+                            <Setter Property="DockPanel.Dock"
+                                    Value="Right"
+                                    TargetName="PART_Icon" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="BorderBrush"
+                                    Value="Red"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>
