@@ -37,6 +37,7 @@
                         <ScrollViewer
                             x:Name="PART_ContentHost"
                             Background="Transparent"
+                            CanContentScroll="True"
                             Focusable="True"
                             HorizontalScrollBarVisibility="Hidden"
                             VerticalScrollBarVisibility="Hidden" />
@@ -94,7 +95,7 @@
                             </DockPanel>
                             <Popup
                                 x:Name="PART_Popup"
-                                Width="{TemplateBinding ActualWidth}"
+                                MinWidth="{TemplateBinding ActualWidth}"
                                 MinHeight="25"
                                 MaxHeight="600"
                                 AllowsTransparency="True"
@@ -108,12 +109,11 @@
                                     BorderBrush="Gray"
                                     BorderThickness="1"
                                     CornerRadius="5">
-                                    <Grid
-                                        Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}">
-                                        <ListBox                  
+                                    <Grid Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}">
+                                        <ListBox
                                             x:Name="PART_Selector"
-                                            Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}"
                                             MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                            Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}"
                                             BorderThickness="0"
                                             Focusable="False"
                                             ItemContainerStyle="{StaticResource ResourceKey=SuggestionItemStyle}"
@@ -194,7 +194,7 @@
                         </DockPanel>
                         <Popup
                             x:Name="PART_Popup"
-                            Width="{TemplateBinding ActualWidth}"
+                            MinWidth="{TemplateBinding ActualWidth}"
                             MinHeight="25"
                             MaxHeight="600"
                             AllowsTransparency="True"
@@ -211,8 +211,8 @@
                                 <Grid>
                                     <ListBox
                                         x:Name="PART_Selector"
-                                        Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}"
                                         MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                        Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}"
                                         BorderThickness="0"
                                         Focusable="False"
                                         ItemTemplate="{TemplateBinding ItemTemplate}"
