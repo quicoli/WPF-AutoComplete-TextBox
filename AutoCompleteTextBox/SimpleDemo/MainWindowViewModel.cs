@@ -33,6 +33,18 @@ namespace SimpleDemo
             }
         }
 
+        private string selectedString;
+
+        public string SelectedString
+        {
+            get => selectedString;
+            set
+            {
+                selectedString = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

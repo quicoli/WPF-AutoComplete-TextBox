@@ -11,19 +11,21 @@
     Height="450"
     mc:Ignorable="d">
     <Window.Resources>
-        <local:NumbersProvider x:Key="NumbersProvider"/>
+        <local:NumbersProvider x:Key="NumbersProvider" />
+        <local:LongStringProvider x:Key="LongStringProvider" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <editors:AutoCompleteTextBox
-            Height="26"
-            VerticalAlignment="Top"
             Width="400"
+            Height="26"
             Margin="20"
             HorizontalAlignment="Left"
+            VerticalAlignment="Top"
             CharacterCasing="Upper"
             MaxLength="50"
             Provider="{StaticResource ResourceKey=NumbersProvider}"
@@ -39,17 +41,37 @@
 
         <editors:AutoCompleteTextBox
             Grid.Row="1"
-            Height="26"
-            VerticalAlignment="Top"
             Width="400"
+            Height="26"
             Margin="20"
             HorizontalAlignment="Left"
+            VerticalAlignment="Top"
             CharacterCasing="Upper"
-            SuggestionBackground="LightBlue"
             MaxLength="50"
             Provider="{StaticResource ResourceKey=NumbersProvider}"
             SelectedItem="{Binding SelectedNumber2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SuggestionBackground="LightBlue"
             Watermark="Enter a number (issue #42)">
+            <editors:AutoCompleteTextBox.LoadingContent>
+                <TextBlock
+                    Margin="5"
+                    FontSize="14"
+                    Text="Loading..." />
+            </editors:AutoCompleteTextBox.LoadingContent>
+        </editors:AutoCompleteTextBox>
+
+        <editors:AutoCompleteTextBox
+            Grid.Row="2"
+            Width="150"
+            Height="26"
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            CharacterCasing="Upper"
+            Provider="{StaticResource ResourceKey=LongStringProvider}"
+            SelectedItem="{Binding SelectedString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SuggestionBackground="LightCoral"
+            Watermark="Enter a letter (issue #39)">
             <editors:AutoCompleteTextBox.LoadingContent>
                 <TextBlock
                     Margin="5"
