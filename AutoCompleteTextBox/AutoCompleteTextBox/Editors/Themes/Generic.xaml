@@ -50,6 +50,7 @@
         <Setter Property="Focusable" Value="False" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="Gray" />
+        <Setter Property="SuggestionBackground" Value="White" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="AllowDrop" Value="true" />
@@ -103,13 +104,15 @@
                                 PopupAnimation="Slide">
                                 <Border
                                     Padding="2"
-                                    Background="White"
+                                    Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}"
                                     BorderBrush="Gray"
                                     BorderThickness="1"
                                     CornerRadius="5">
-                                    <Grid>
-                                        <ListBox
+                                    <Grid
+                                        Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}">
+                                        <ListBox                  
                                             x:Name="PART_Selector"
+                                            Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}"
                                             MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                             BorderThickness="0"
                                             Focusable="False"
