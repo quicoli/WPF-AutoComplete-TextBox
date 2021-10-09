@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logo", "Logo", "{C4107B5E-C
 		Logo\AutoCompleteTextBox.png = Logo\AutoCompleteTextBox.png
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDemo", "SimpleDemo\SimpleDemo.csproj", "{8EC52544-21F7-4B70-8A66-DAFCA567626D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5F52FB10-7085-4668-B6EC-F92272FFF6FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F52FB10-7085-4668-B6EC-F92272FFF6FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F52FB10-7085-4668-B6EC-F92272FFF6FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EC52544-21F7-4B70-8A66-DAFCA567626D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC52544-21F7-4B70-8A66-DAFCA567626D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EC52544-21F7-4B70-8A66-DAFCA567626D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EC52544-21F7-4B70-8A66-DAFCA567626D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

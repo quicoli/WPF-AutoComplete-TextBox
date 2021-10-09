@@ -1,13 +1,14 @@
-﻿<Application x:Class="AutoCompleteTextBox.Demo.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:AutoCompleteTextBox.Demo"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="AutoCompleteTextBox.Demo.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AutoCompleteTextBox.Demo"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <!-- Material -->
+                <!--  Material  -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/materialdesigncolor.indigo.xaml" />
@@ -17,7 +18,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
-                <ResourceDictionary Source="Styles/CustomStyles.xaml"/>
+                <ResourceDictionary Source="Styles/CustomStyles.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
