@@ -151,6 +151,7 @@
 
     <Style TargetType="editors:AutoCompleteComboBox">
         <Setter Property="Focusable" Value="True" />
+        <Setter Property="SuggestionBackground" Value="White" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -203,13 +204,14 @@
                             PopupAnimation="Slide">
                             <Border
                                 Padding="2"
-                                Background="White"
+                                Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}"
                                 BorderBrush="Gray"
                                 BorderThickness="1"
                                 CornerRadius="5">
                                 <Grid>
                                     <ListBox
                                         x:Name="PART_Selector"
+                                        Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}"
                                         MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                         BorderThickness="0"
                                         Focusable="False"
