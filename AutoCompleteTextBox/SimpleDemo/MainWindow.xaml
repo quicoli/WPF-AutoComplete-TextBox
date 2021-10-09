@@ -1,0 +1,84 @@
+﻿<Window
+    x:Class="SimpleDemo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:editors="http://wpfcontrols.com/"
+    xmlns:local="clr-namespace:SimpleDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Simple Demo"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <local:NumbersProvider x:Key="NumbersProvider" />
+        <local:LongStringProvider x:Key="LongStringProvider" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <editors:AutoCompleteTextBox
+            Width="400"
+            Height="26"
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            CharacterCasing="Upper"
+            MaxLength="50"
+            Provider="{StaticResource ResourceKey=NumbersProvider}"
+            SelectedItem="{Binding SelectedNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Watermark="Enter a number (issue #43)">
+            <editors:AutoCompleteTextBox.LoadingContent>
+                <TextBlock
+                    Margin="5"
+                    FontSize="14"
+                    Text="Loading..." />
+            </editors:AutoCompleteTextBox.LoadingContent>
+        </editors:AutoCompleteTextBox>
+
+        <editors:AutoCompleteTextBox
+            Grid.Row="1"
+            Width="400"
+            Height="26"
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            CharacterCasing="Upper"
+            MaxLength="50"
+            Provider="{StaticResource ResourceKey=NumbersProvider}"
+            SelectedItem="{Binding SelectedNumber2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SuggestionBackground="LightBlue"
+            Watermark="Enter a number (issue #42)">
+            <editors:AutoCompleteTextBox.LoadingContent>
+                <TextBlock
+                    Margin="5"
+                    FontSize="14"
+                    Text="Loading..." />
+            </editors:AutoCompleteTextBox.LoadingContent>
+        </editors:AutoCompleteTextBox>
+
+        <editors:AutoCompleteTextBox
+            Grid.Row="2"
+            Width="150"
+            Height="26"
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            CharacterCasing="Upper"
+            Provider="{StaticResource ResourceKey=LongStringProvider}"
+            SelectedItem="{Binding SelectedString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SuggestionBackground="LightCoral"
+            Watermark="Enter a letter (issue #39)">
+            <editors:AutoCompleteTextBox.LoadingContent>
+                <TextBlock
+                    Margin="5"
+                    FontSize="14"
+                    Text="Loading..." />
+            </editors:AutoCompleteTextBox.LoadingContent>
+        </editors:AutoCompleteTextBox>
+
+    </Grid>
+</Window>

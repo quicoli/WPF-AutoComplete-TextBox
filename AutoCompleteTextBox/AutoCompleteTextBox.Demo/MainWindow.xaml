@@ -1,204 +1,230 @@
-﻿<Window x:Class="AutoCompleteTextBox.Demo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:scm="clr-namespace:System;assembly=System"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:local="clr-namespace:AutoCompleteTextBox.Demo"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:acb="http://wpfcontrols.com/"
-        xmlns:providers="clr-namespace:AutoCompleteTextBox.Demo.Providers"
-        mc:Ignorable="d"
-        Title="WPF AutoComplete Demo"
-        MinHeight="350" MinWidth="525"
-        Height="350" Width="800"
-        ResizeMode="CanResizeWithGrip"
-
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        TextElement.FontSize="14"
-        TextElement.FontWeight="Medium"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+﻿<Window
+    x:Class="AutoCompleteTextBox.Demo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:acb="http://wpfcontrols.com/"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:AutoCompleteTextBox.Demo"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:providers="clr-namespace:AutoCompleteTextBox.Demo.Providers"
+    xmlns:scm="clr-namespace:System;assembly=System"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Title="WPF AutoComplete Demo"
+    Width="800"
+    Height="350"
+    MinWidth="525"
+    MinHeight="350"
+    FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+    ResizeMode="CanResizeWithGrip"
+    TextElement.FontSize="14"
+    TextElement.FontWeight="Medium"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
 
     <Window.Resources>
         <sys:String x:Key="RepositoryUrl">https://github.com/quicoli/WPF-AutoComplete-TextBox</sys:String>
         <scm:Uri x:Key="RepositoryUri">https://github.com/quicoli/WPF-AutoComplete-TextBox</scm:Uri>
 
-        <TextBlock x:Key="LoadingContent" Text="Loading..." Margin="5" FontSize="14" />
+        <TextBlock
+            x:Key="LoadingContent"
+            Margin="5"
+            FontSize="14"
+            Text="Loading..." />
 
-        <providers:StateSuggestionProvider x:Key="StateSuggestionProvider"/>
+        <providers:StateSuggestionProvider x:Key="StateSuggestionProvider" />
         <DataTemplate x:Key="StateTemplate">
             <Grid>
-                <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                <TextBlock Text="{Binding Path=Name}" />
             </Grid>
         </DataTemplate>
 
-        <providers:WebColorsSuggestionProvider x:Key="WebColorsSuggestionProvider"/>
+        <providers:WebColorsSuggestionProvider x:Key="WebColorsSuggestionProvider" />
         <DataTemplate x:Key="WebColorItemTemplate">
             <Grid Grid.IsSharedSizeScope="True">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="16" SharedSizeGroup="AutoColor"/>
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="AutoName"/>
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="AutoDesc"/>
+                    <ColumnDefinition Width="16" SharedSizeGroup="AutoColor" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="AutoName" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="AutoDesc" />
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Background="{Binding Brush}"/>
-                <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="5,0,0,0"/>
-                <TextBlock Grid.Column="2" Text="{Binding HexCode}" Margin="5,0,0,0" Foreground="LightGray"/>
+                <Border Grid.Column="0" Background="{Binding Brush}" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="5,0,0,0"
+                    Text="{Binding Name}" />
+                <TextBlock
+                    Grid.Column="2"
+                    Margin="5,0,0,0"
+                    Foreground="LightGray"
+                    Text="{Binding HexCode}" />
             </Grid>
         </DataTemplate>
     </Window.Resources>
 
-    <Border BorderThickness="2" BorderBrush="{StaticResource MaterialDesignTextBoxBorder}">
-        <DockPanel Background="{StaticResource MaterialDesignPaper}"
-                   LastChildFill="True">
-            <materialDesign:ColorZone Height="50"
-                           DockPanel.Dock="Top"
-                           Mode="PrimaryMid"
-                           MouseDown="Titlebar_OnMouseDown"
-                           >
+    <Border BorderBrush="{StaticResource MaterialDesignTextBoxBorder}" BorderThickness="2">
+        <DockPanel Background="{StaticResource MaterialDesignPaper}" LastChildFill="True">
+            <materialDesign:ColorZone
+                Height="50"
+                DockPanel.Dock="Top"
+                Mode="PrimaryMid"
+                MouseDown="Titlebar_OnMouseDown">
                 <DockPanel>
-                    <Button x:Name="BtnClose"
-                            Click="BtnClose_Click"
-                            Height="20"
-                            VerticalAlignment="Top"
-                            DockPanel.Dock="Right"
-                            Style="{StaticResource CloseButtonStyle}"
-                            ToolTip="Close" />
-                    <Button x:Name="BtnMin"
-                            Height="20"
-                            VerticalAlignment="Top"
-                            Click="BtnMin_Click"
-                            DockPanel.Dock="Right"
-                            Style="{StaticResource MinimizeButtonStyle}"
-                            ToolTip="Minimize" />
-                    <TextBlock HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               FontSize="16">
+                    <Button
+                        x:Name="BtnClose"
+                        Height="20"
+                        VerticalAlignment="Top"
+                        Click="BtnClose_Click"
+                        DockPanel.Dock="Right"
+                        Style="{StaticResource CloseButtonStyle}"
+                        ToolTip="Close" />
+                    <Button
+                        x:Name="BtnMin"
+                        Height="20"
+                        VerticalAlignment="Top"
+                        Click="BtnMin_Click"
+                        DockPanel.Dock="Right"
+                        Style="{StaticResource MinimizeButtonStyle}"
+                        ToolTip="Minimize" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="16">
                         WPF AutoComplete TextBox Demo
                     </TextBlock>
                 </DockPanel>
             </materialDesign:ColorZone>
-            <materialDesign:ColorZone Height="30"
-                        Mode="PrimaryLight"
-                        DockPanel.Dock="Bottom"
-                        Padding="8">
+            <materialDesign:ColorZone
+                Height="30"
+                Padding="8"
+                DockPanel.Dock="Bottom"
+                Mode="PrimaryLight">
                 <Border>
                     <TextBlock FontSize="12">
-                        <Hyperlink NavigateUri="{StaticResource RepositoryUri}"
-                                   RequestNavigate="Hyperlink_RequestNavigate">
-                            <Run Text="{StaticResource RepositoryUrl}"/>
+                        <Hyperlink NavigateUri="{StaticResource RepositoryUri}" RequestNavigate="Hyperlink_RequestNavigate">
+                            <Run Text="{StaticResource RepositoryUrl}" />
                         </Hyperlink>
                     </TextBlock>
                 </Border>
             </materialDesign:ColorZone>
 
-            <Grid x:Name="GridContent" Margin="5,0,0,0" DockPanel.Dock="Bottom">
+            <Grid
+                x:Name="GridContent"
+                Margin="5,0,0,0"
+                DockPanel.Dock="Bottom">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
                 <StackPanel DataContext="{Binding SelectedPerson}" Orientation="Vertical">
                     <StackPanel Margin="0,20,0,0" Orientation="Vertical">
                         <TextBlock Foreground="{StaticResource PrimaryHueDarkBrush}">Your name</TextBlock>
-                        <TextBox MaxLength="100" CharacterCasing="Upper" 
-                                 HorizontalAlignment="Stretch"
-                                 Margin="0,0,6,0"
-                                 ToolTip="Type your full name please"
-                                 Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}">
-                        </TextBox>
+                        <TextBox
+                            Margin="0,0,6,0"
+                            HorizontalAlignment="Stretch"
+                            CharacterCasing="Upper"
+                            MaxLength="100"
+                            Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
+                            ToolTip="Type your full name please" />
                     </StackPanel>
 
                     <StackPanel Margin="0,20,0,0" Orientation="Vertical">
                         <TextBlock Foreground="{StaticResource PrimaryHueDarkBrush}">State</TextBlock>
-                        <acb:AutoCompleteComboBox HorizontalAlignment="Stretch"
-                                                 Style="{StaticResource MaterialAutoCompleteComboBox}"
-                                                 MaxLength="50"
-                                                 CharacterCasing="Upper"
-                                                 DisplayMember="Name"
-                                                 Height="26"
-                                                 Margin="0,0,6,0"
-                                                 Provider="{StaticResource ResourceKey=StateSuggestionProvider}"
-                                                 ItemTemplate="{StaticResource ResourceKey=StateTemplate}"
-                                                 LoadingContent="{StaticResource LoadingContent}"
-                                                 SelectedItem="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                                 Watermark="Select a state">
-                        </acb:AutoCompleteComboBox>
+                        <acb:AutoCompleteComboBox
+                            Height="26"
+                            Margin="0,0,6,0"
+                            HorizontalAlignment="Stretch"
+                            CharacterCasing="Upper"
+                            DisplayMember="Name"
+                            ItemTemplate="{StaticResource ResourceKey=StateTemplate}"
+                            LoadingContent="{StaticResource LoadingContent}"
+                            MaxLength="50"
+                            Provider="{StaticResource ResourceKey=StateSuggestionProvider}"
+                            SelectedItem="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                            Style="{StaticResource MaterialAutoCompleteComboBox}"
+                            Watermark="Select a state" />
 
                     </StackPanel>
 
                     <StackPanel Margin="0,20,0,0" Orientation="Vertical">
                         <TextBlock Foreground="{StaticResource PrimaryHueDarkBrush}">Favorite Color</TextBlock>
-                        <acb:AutoCompleteTextBox HorizontalAlignment="Stretch"
-                                                 Style="{StaticResource MaterialAutoCompleteTextBox}"
-                                                 MaxLength="50"
-                                                 CharacterCasing="Upper"
-                                                 DisplayMember="Name"
-                                                 Height="26"
-                                                 Margin="0,0,6,0"
-                                                 Provider="{StaticResource ResourceKey=WebColorsSuggestionProvider}"
-                                                 ItemTemplate="{StaticResource ResourceKey=WebColorItemTemplate}"
-                                                 SelectedItem="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                 Watermark="Enter favorite color">
+                        <acb:AutoCompleteTextBox
+                            Height="26"
+                            Margin="0,0,6,0"
+                            HorizontalAlignment="Stretch"
+                            CharacterCasing="Upper"
+                            DisplayMember="Name"
+                            ItemTemplate="{StaticResource ResourceKey=WebColorItemTemplate}"
+                            MaxLength="50"
+                            Provider="{StaticResource ResourceKey=WebColorsSuggestionProvider}"
+                            SelectedItem="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialAutoCompleteTextBox}"
+                            Watermark="Enter favorite color">
                             <acb:AutoCompleteTextBox.LoadingContent>
-                                <TextBlock Text="Loading..." Margin="5" FontSize="14" />
+                                <TextBlock
+                                    Margin="5"
+                                    FontSize="14"
+                                    Text="Loading..." />
                             </acb:AutoCompleteTextBox.LoadingContent>
                         </acb:AutoCompleteTextBox>
 
                     </StackPanel>
                 </StackPanel>
 
-                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+                <GridSplitter
+                    Grid.Column="1"
+                    Width="5"
+                    HorizontalAlignment="Stretch" />
 
-                <DataGrid Grid.Column="2"
-                          AutoGenerateColumns="False"
-                          ItemsSource="{Binding People}"
-                          SelectedItem="{Binding SelectedPerson}"
-                          HorizontalGridLinesBrush="LightGray"
-                          VerticalGridLinesBrush="LightGray">
+                <DataGrid
+                    Grid.Column="2"
+                    AutoGenerateColumns="False"
+                    HorizontalGridLinesBrush="LightGray"
+                    ItemsSource="{Binding People}"
+                    SelectedItem="{Binding SelectedPerson}"
+                    VerticalGridLinesBrush="LightGray">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
                         <DataGridTemplateColumn Header="State">
                             <DataGridTemplateColumn.CellEditingTemplate>
                                 <DataTemplate>
-                                    <acb:AutoCompleteTextBox MaxLength="50"
-                                                             CharacterCasing="Upper"
-                                                             DisplayMember="Name"
-                                                             Provider="{StaticResource ResourceKey=StateSuggestionProvider}"
-                                                             ItemTemplate="{StaticResource ResourceKey=StateTemplate}"
-                                                             LoadingContent="{StaticResource LoadingContent}"
-                                                             SelectedItem="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                                             />
+                                    <acb:AutoCompleteTextBox
+                                        CharacterCasing="Upper"
+                                        DisplayMember="Name"
+                                        ItemTemplate="{StaticResource ResourceKey=StateTemplate}"
+                                        LoadingContent="{StaticResource LoadingContent}"
+                                        MaxLength="50"
+                                        Provider="{StaticResource ResourceKey=StateSuggestionProvider}"
+                                        SelectedItem="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding State.Name}"/>
+                                    <TextBlock Text="{Binding State.Name}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Color">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ContentPresenter Content="{Binding Color}" ContentTemplate="{StaticResource WebColorItemTemplate}"/>
+                                    <ContentPresenter Content="{Binding Color}" ContentTemplate="{StaticResource WebColorItemTemplate}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                             <DataGridTemplateColumn.CellEditingTemplate>
                                 <DataTemplate>
-                                    <acb:AutoCompleteTextBox MaxLength="50"
-                                                             CharacterCasing="Upper"
-                                                             DisplayMember="Name"
-                                                             Provider="{StaticResource ResourceKey=WebColorsSuggestionProvider}"
-                                                             ItemTemplate="{StaticResource ResourceKey=WebColorItemTemplate}"
-                                                             LoadingContent="{StaticResource LoadingContent}"
-                                                             SelectedItem="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                                             />
+                                    <acb:AutoCompleteTextBox
+                                        CharacterCasing="Upper"
+                                        DisplayMember="Name"
+                                        ItemTemplate="{StaticResource ResourceKey=WebColorItemTemplate}"
+                                        LoadingContent="{StaticResource LoadingContent}"
+                                        MaxLength="50"
+                                        Provider="{StaticResource ResourceKey=WebColorsSuggestionProvider}"
+                                        SelectedItem="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellEditingTemplate>
                         </DataGridTemplateColumn>
