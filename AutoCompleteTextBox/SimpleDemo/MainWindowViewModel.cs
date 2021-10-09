@@ -20,7 +20,19 @@ namespace SimpleDemo
                 OnPropertyChanged();
             }
         }
-        
+
+        private string selectedNumber2;
+
+        public string SelectedNumber2
+        {
+            get => selectedNumber2;
+            set
+            {
+                selectedNumber2 = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

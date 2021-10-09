@@ -14,6 +14,10 @@
         <local:NumbersProvider x:Key="NumbersProvider"/>
     </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <editors:AutoCompleteTextBox
             Height="26"
             VerticalAlignment="Top"
@@ -25,6 +29,27 @@
             Provider="{StaticResource ResourceKey=NumbersProvider}"
             SelectedItem="{Binding SelectedNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Watermark="Enter a number (issue #43)">
+            <editors:AutoCompleteTextBox.LoadingContent>
+                <TextBlock
+                    Margin="5"
+                    FontSize="14"
+                    Text="Loading..." />
+            </editors:AutoCompleteTextBox.LoadingContent>
+        </editors:AutoCompleteTextBox>
+
+        <editors:AutoCompleteTextBox
+            Grid.Row="1"
+            Height="26"
+            VerticalAlignment="Top"
+            Width="400"
+            Margin="20"
+            HorizontalAlignment="Left"
+            CharacterCasing="Upper"
+            SuggestionBackground="LightBlue"
+            MaxLength="50"
+            Provider="{StaticResource ResourceKey=NumbersProvider}"
+            SelectedItem="{Binding SelectedNumber2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Watermark="Enter a number (issue #42)">
             <editors:AutoCompleteTextBox.LoadingContent>
                 <TextBlock
                     Margin="5"
