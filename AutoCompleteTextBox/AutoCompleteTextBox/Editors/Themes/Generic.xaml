@@ -215,6 +215,7 @@
                                         Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}"
                                         BorderThickness="0"
                                         Focusable="False"
+                                        ItemContainerStyle="{StaticResource ResourceKey=SuggestionItemStyle}"
                                         ItemTemplate="{TemplateBinding ItemTemplate}"
                                         ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
