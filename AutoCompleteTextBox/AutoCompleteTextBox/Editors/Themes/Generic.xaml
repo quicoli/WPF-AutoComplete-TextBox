@@ -89,8 +89,7 @@
                                         CharacterCasing="{Binding Path=CharacterCasing, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                         Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"
                                         MaxLength="{Binding Path=MaxLength, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-                                        Style="{StaticResource ResourceKey=TransparentTextBoxStyle}"
-                                        Text="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
+                                        Style="{StaticResource ResourceKey=TransparentTextBoxStyle}" />
                                 </Grid>
                             </DockPanel>
                             <Popup
@@ -187,8 +186,7 @@
                                         VerticalAlignment="Center"
                                         CharacterCasing="{Binding Path=CharacterCasing, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                         Focusable="True"
-                                        MaxLength="{Binding Path=MaxLength, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-                                        Text="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
+                                        MaxLength="{Binding Path=MaxLength, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
                                 </DockPanel>
                             </Grid>
                         </DockPanel>
