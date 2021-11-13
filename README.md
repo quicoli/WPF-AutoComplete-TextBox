@@ -4,7 +4,7 @@
 
 
 Install:
-```PM> Install-Package AutoCompleteTextBox -Version 1.2.0```
+```PM> Install-Package AutoCompleteTextBox -Version 1.2.3```
 
 
 >WPF AutoComplete TextBox is an original work from [Bhardwaj Deepak](http://www.codeproject.com/Tips/801004/WPF-AutoComplete-TextBox)
@@ -35,7 +35,7 @@ This control originally features:
 
 A WPF application using the [Material Design in XAML Toolkit](http://materialdesigninxaml.net/) and MVVM.  See it in action!
 
-![demo in action](http://g.recordit.co/lXPdBMPGjD.gif "Demo in Action")
+![demo in action](http://g.recordit.co/UCYMBiCTeo.gif "Demo in Action")
 
 
 PS.: Screen cast by: http://recordit.co/ 
