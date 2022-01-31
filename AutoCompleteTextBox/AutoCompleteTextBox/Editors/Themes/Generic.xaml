@@ -50,7 +50,7 @@
     <Style TargetType="{x:Type editors:AutoCompleteTextBox}">
         <Setter Property="Focusable" Value="False" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="Gray" />
+        <Setter Property="BorderBrush" Value="#FFABADB3" />
         <Setter Property="SuggestionBackground" Value="White" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -65,7 +65,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="3">
+                        CornerRadius="0">
                         <Grid>
                             <DockPanel>
                                 <ContentPresenter
