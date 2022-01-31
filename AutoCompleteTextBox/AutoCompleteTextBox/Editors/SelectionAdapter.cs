@@ -43,7 +43,6 @@ namespace AutoCompleteTextBox.Editors
 
         public void HandleKeyDown(KeyEventArgs key)
         {
-            //Debug.WriteLine(key.Key);
             switch (key.Key)
             {
                 case Key.Down:
@@ -100,8 +99,14 @@ namespace AutoCompleteTextBox.Editors
 
         private void OnSelectorMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Commit?.Invoke();
-            e.Handled = true;
+            // If sender is the RepeatButton from the scrollbar we need to 
+            // to skip this event otherwise focus get stuck in the RepeatButton
+            // and list is scrolled up or down til the end.
+            if (e.OriginalSource.GetType() != typeof(RepeatButton))
+            {
+                Commit?.Invoke();
+                e.Handled = true;
+            }
         }
 
         #endregion
