@@ -4,7 +4,7 @@
 
 
 Install:
-```PM> Install-Package AutoCompleteTextBox -Version 1.2.3```
+```PM> Install-Package AutoCompleteTextBox -Version 1.3.0```
 
 
 >WPF AutoComplete TextBox is an original work from [Bhardwaj Deepak](http://www.codeproject.com/Tips/801004/WPF-AutoComplete-TextBox)
@@ -21,9 +21,7 @@ This control originally features:
 
 ### Changes/improvements
 
-1. I've included two more properties for making things easier:
-  * MaxLength
-  * CharacterCasing
+1. More properties for making things easier:
 2. Also, fixed up the focus control.
 3. Removed VB.NET stuff from original solution.
 4. Added a new demo showcasing the new capabilities
