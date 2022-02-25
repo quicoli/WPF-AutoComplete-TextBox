@@ -6,6 +6,11 @@ namespace AutoCompleteTextBox.Editors
 {
     public class SelectionAdapter
     {
+        public class PreSelectionAdapterFinishArgs {
+            public EventCause cause;
+            public bool is_cancel;
+            public bool handled;
+        }
 
         #region "Fields"
         #endregion
@@ -22,9 +27,10 @@ namespace AutoCompleteTextBox.Editors
 
         #region "Events"
 
-        public delegate void CancelEventHandler();
+        public enum EventCause { Other, PopupClosed, ItemClicked, EnterPressed, EscapePressed, TabPressed, MouseDown}
+        public delegate void CancelEventHandler(EventCause cause);
 
-        public delegate void CommitEventHandler();
+        public delegate void CommitEventHandler(EventCause cause);
 
         public delegate void SelectionChangedEventHandler();
 
@@ -52,15 +58,15 @@ namespace AutoCompleteTextBox.Editors
                     DecrementSelection();
                     break;
                 case Key.Enter:
-                    Commit?.Invoke();
+                    Commit?.Invoke(EventCause.EnterPressed);
 
                     break;
                 case Key.Escape:
-                    Cancel?.Invoke();
+                    Cancel?.Invoke(EventCause.EscapePressed);
 
                     break;
                 case Key.Tab:
-                    Commit?.Invoke();
+                    Commit?.Invoke(EventCause.TabPressed);
 
                     break;
                 default:
@@ -104,7 +110,7 @@ namespace AutoCompleteTextBox.Editors
             // and list is scrolled up or down til the end.
             if (e.OriginalSource.GetType() != typeof(RepeatButton))
             {
-                Commit?.Invoke();
+                Commit?.Invoke(EventCause.MouseDown);
                 e.Handled = true;
             }
         }

@@ -324,7 +324,7 @@ namespace AutoCompleteTextBox.Editors
             if (!ItemsSelector.Items.Contains(((FrameworkElement)e.OriginalSource)?.DataContext))
                 return;
             ItemsSelector.SelectedItem = ((FrameworkElement)e.OriginalSource)?.DataContext;
-            OnSelectionAdapterCommit();
+            OnSelectionAdapterCommit(SelectionAdapter.EventCause.MouseDown);
             e.Handled = true;
         }
         private void AutoCompleteTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -411,7 +411,7 @@ namespace AutoCompleteTextBox.Editors
         {
             if (!_selectionCancelled)
             {
-                OnSelectionAdapterCommit();
+                OnSelectionAdapterCommit(SelectionAdapter.EventCause.PopupClosed);
             }
         }
 
@@ -421,8 +421,11 @@ namespace AutoCompleteTextBox.Editors
             ItemsSelector.SelectedItem = SelectedItem;
         }
 
-        private void OnSelectionAdapterCancel()
+        private void OnSelectionAdapterCancel(SelectionAdapter.EventCause cause)
         {
+            if (PreSelectionEventSomeoneHandled(cause, true))
+                return;
+
             _isUpdatingText = true;
             Editor.Text = SelectedItem == null ? Filter : GetDisplayText(SelectedItem);
             Editor.SelectionStart = Editor.Text.Length;
@@ -430,10 +433,23 @@ namespace AutoCompleteTextBox.Editors
             _isUpdatingText = false;
             IsDropDownOpen = false;
             _selectionCancelled = true;
+
         }
 
-        private void OnSelectionAdapterCommit()
+        public event EventHandler<SelectionAdapter.PreSelectionAdapterFinishArgs> PreSelectionAdapterFinish;
+        private bool PreSelectionEventSomeoneHandled(SelectionAdapter.EventCause cause, bool is_cancel) {
+            if (PreSelectionAdapterFinish == null)
+                return false;
+            var args = new SelectionAdapter.PreSelectionAdapterFinishArgs { cause = cause, is_cancel = is_cancel };
+            PreSelectionAdapterFinish?.Invoke(this, args);
+            return args.handled;
+            
+        }
+        private void OnSelectionAdapterCommit(SelectionAdapter.EventCause cause)
         {
+            if (PreSelectionEventSomeoneHandled(cause, false))
+                return;
+
             if (ItemsSelector.SelectedItem != null)
             {
                 SelectedItem = ItemsSelector.SelectedItem;
