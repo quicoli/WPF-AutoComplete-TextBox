@@ -4,7 +4,7 @@
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <TargetFrameworks>net452;net472;netcoreapp3.1;net5.0-windows;net6.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <Version>1.3.1.0</Version>
+    <Version>1.4.0.0</Version>
     <PackageProjectUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</PackageProjectUrl>
     <RepositoryType />
     <RepositoryUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</RepositoryUrl>
@@ -13,7 +13,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ApplicationIcon>AutoCompleteTextBox.ico</ApplicationIcon>
     <PackageReleaseNotes>
-      Fix for issue #29.
-    </PackageReleaseNotes>
+		Fix for issue #29.
+		New event added: PreSelectionAdapterFinish
+	</PackageReleaseNotes>
   </PropertyGroup>
 </Project>
