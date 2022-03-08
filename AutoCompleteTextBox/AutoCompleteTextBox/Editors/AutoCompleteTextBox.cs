@@ -41,6 +41,7 @@ namespace AutoCompleteTextBox.Editors
         public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register("MaxLength", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(0));
         public static readonly DependencyProperty CharacterCasingProperty = DependencyProperty.Register("CharacterCasing", typeof(CharacterCasing), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(CharacterCasing.Normal));
         public static readonly DependencyProperty MaxPopUpHeightProperty = DependencyProperty.Register("MaxPopUpHeight", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(600));
+        public static readonly DependencyProperty MaxPopUpWidthProperty = DependencyProperty.Register("MaxPopUpWidth", typeof(int), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(2000));
 
         public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty));
 
@@ -70,7 +71,11 @@ namespace AutoCompleteTextBox.Editors
             get => (int)GetValue(MaxPopUpHeightProperty);
             set => SetValue(MaxPopUpHeightProperty, value);
         }
-
+        public int MaxPopupWidth
+        {
+            get => (int)GetValue(MaxPopUpWidthProperty);
+            set => SetValue(MaxPopUpWidthProperty, value);
+        }
 
         public BindingEvaluator BindingEvaluator { get; set; }
 

@@ -1,4 +1,4 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:editors="clr-namespace:AutoCompleteTextBox.Editors">
@@ -112,6 +112,7 @@
                                         <ListBox
                                             x:Name="PART_Selector"
                                             MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+											MaxWidth="{Binding Path=MaxPopupWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                             Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}"
                                             BorderThickness="0"
                                             Focusable="False"
@@ -210,6 +211,7 @@
                                     <ListBox
                                         x:Name="PART_Selector"
                                         MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+										MaxWidth="{Binding Path=MaxPopupWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                         Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}"
                                         BorderThickness="0"
                                         Focusable="False"
