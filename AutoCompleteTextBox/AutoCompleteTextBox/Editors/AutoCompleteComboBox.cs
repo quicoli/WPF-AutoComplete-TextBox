@@ -351,7 +351,8 @@ namespace AutoCompleteTextBox.Editors
             {
                 _suggestionsAdapter = new SuggestionsAdapter(this);
             }
-            _suggestionsAdapter.ShowFullCollection();
+            if (SelectedItem != null || String.IsNullOrWhiteSpace(Editor.Text))
+                _suggestionsAdapter.ShowFullCollection();
 
         }
 
@@ -540,7 +541,6 @@ namespace AutoCompleteTextBox.Editors
 
             public void GetSuggestions(string searchText)
             {
-                _filter = searchText;
                 _actb.IsLoading = true;
                 // Do not open drop down if control is not focused
                 if (_actb.IsKeyboardFocusWithin)
@@ -548,6 +548,7 @@ namespace AutoCompleteTextBox.Editors
                 _actb.ItemsSelector.ItemsSource = null;
                 ParameterizedThreadStart thInfo = GetSuggestionsAsync;
                 Thread th = new Thread(thInfo);
+                _filter = searchText;
                 th.Start(new object[] { searchText, _actb.Provider });
             }
             public void ShowFullCollection()
