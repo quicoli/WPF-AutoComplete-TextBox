@@ -4,7 +4,7 @@
 
 
 Install:
-```PM> Install-Package AutoCompleteTextBox -Version 1.4.0```
+```PM> Install-Package AutoCompleteTextBox -Version 1.5.0```
 
 
 >WPF AutoComplete TextBox is an original work from [Bhardwaj Deepak](http://www.codeproject.com/Tips/801004/WPF-AutoComplete-TextBox)
@@ -29,26 +29,13 @@ This control originally features:
 6. Added property MaxPopupHeight. Setting this property, will limit the popup height to the size you wish.
 7. Much more from collaborators!
 
-### What's new in version 1.4.0?
 
-1. New event, **PreSelectionAdapterFinish** right before selection is finished allowing users to decide 
-if it should close or not and providing the cause for it finishing.
+### What's new in version 1.5.0?
 
-```
-        private void AutoCompleteTextBox_PreSelectionAdapterFinish(object sender, SelectionAdapter.PreSelectionAdapterFinishArgs e) 
-		{
-			var box = sender as AutoCompleteComboBox;
-			if (e.cause == SelectionAdapter.EventCause.EnterPressed) 
-			{
-				if (box.ItemsSelector.SelectedItem == null && box.ItemsSelector.Items.Count == 1)
-					box.ItemsSelector.SelectedItem = box.ItemsSelector.Items.GetItemAt(0);
-			}
-		}
-```
+1. property MaxPopupWidth : self explanatory :)
+This closes #39, allow MaxWidth to be set on popups
 
-2. Fixed issue #29.  
-
-
+2. Bug fixes: #52, #45, #40
 
 
 
