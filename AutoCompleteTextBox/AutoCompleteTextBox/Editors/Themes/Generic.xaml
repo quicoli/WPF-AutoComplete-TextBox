@@ -5,7 +5,7 @@
 
     <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
 
-    <Style x:Key="SuggestionItemStyle" TargetType="ListBoxItem">
+    <Style x:Key="TextBoxSuggestionItemStyle" TargetType="ListBoxItem">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -14,8 +14,27 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="ContentBorder" Property="Background" Value="{x:Static SystemColors.HighlightBrush}" />
                             <Setter Property="TextElement.Foreground" Value="{x:Static SystemColors.HighlightTextBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ComboBoxSuggestionItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="ContentBorder" Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="IsSelected" Value="True" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
@@ -112,11 +131,11 @@
                                         <ListBox
                                             x:Name="PART_Selector"
                                             MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-											MaxWidth="{Binding Path=MaxPopupWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                            MaxWidth="{Binding Path=MaxPopupWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                             Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}"
                                             BorderThickness="0"
                                             Focusable="False"
-                                            ItemContainerStyle="{StaticResource ResourceKey=SuggestionItemStyle}"
+                                            ItemContainerStyle="{StaticResource ResourceKey=TextBoxSuggestionItemStyle}"
                                             ItemTemplate="{TemplateBinding ItemTemplate}"
                                             ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                             ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -211,11 +230,11 @@
                                     <ListBox
                                         x:Name="PART_Selector"
                                         MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-										MaxWidth="{Binding Path=MaxPopupWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                        MaxWidth="{Binding Path=MaxPopupWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                         Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}"
                                         BorderThickness="0"
                                         Focusable="False"
-                                        ItemContainerStyle="{StaticResource ResourceKey=SuggestionItemStyle}"
+                                        ItemContainerStyle="{StaticResource ResourceKey=ComboBoxSuggestionItemStyle}"
                                         ItemTemplate="{TemplateBinding ItemTemplate}"
                                         ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
