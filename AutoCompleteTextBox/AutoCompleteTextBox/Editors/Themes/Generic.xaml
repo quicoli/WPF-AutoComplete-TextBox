@@ -48,7 +48,6 @@
     </Style>
 
     <Style TargetType="{x:Type editors:AutoCompleteTextBox}">
-        <Setter Property="Focusable" Value="False" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="#FFABADB3" />
         <Setter Property="SuggestionBackground" Value="White" />

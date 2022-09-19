@@ -58,6 +58,7 @@ namespace AutoCompleteTextBox.Editors
         static AutoCompleteTextBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(typeof(AutoCompleteTextBox)));
+            FocusableProperty.OverrideMetadata(typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(true));
         }
 
         #endregion
@@ -301,6 +302,7 @@ namespace AutoCompleteTextBox.Editors
             }
 
             GotFocus += AutoCompleteTextBox_GotFocus;
+            GotKeyboardFocus += AutoCompleteTextBox_GotKeyboardFocus;
 
             if (Popup != null)
             {
@@ -330,6 +332,13 @@ namespace AutoCompleteTextBox.Editors
         private void AutoCompleteTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             Editor?.Focus();
+        }
+        private void AutoCompleteTextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
+            if (e.NewFocus != this)
+                return;
+            if (e.OldFocus == Editor)
+                MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
+
         }
 
         private string GetDisplayText(object dataItem)
