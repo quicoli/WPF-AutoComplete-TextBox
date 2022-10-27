@@ -25,7 +25,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style x:Key="ComboBoxSuggestionItemStyle" TargetType="ListBoxItem">
         <Setter Property="Template">
             <Setter.Value>
@@ -129,8 +129,8 @@
                                     <Grid Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}">
                                         <ListBox
                                             x:Name="PART_Selector"
-                                            MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                             MaxWidth="{Binding Path=MaxPopupWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                            MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                             Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}"
                                             BorderThickness="0"
                                             Focusable="False"
@@ -228,8 +228,8 @@
                                 <Grid>
                                     <ListBox
                                         x:Name="PART_Selector"
-                                        MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                         MaxWidth="{Binding Path=MaxPopupWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                        MaxHeight="{Binding Path=MaxPopupHeight, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                         Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}"
                                         BorderThickness="0"
                                         Focusable="False"

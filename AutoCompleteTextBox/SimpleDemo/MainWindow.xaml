@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:editors="http://wpfcontrols.com/"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:SimpleDemo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Simple Demo"
@@ -16,6 +17,8 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -79,6 +82,61 @@
                     Text="Loading..." />
             </editors:AutoCompleteTextBox.LoadingContent>
         </editors:AutoCompleteTextBox>
+
+        <editors:AutoCompleteTextBox
+            Grid.Row="3"
+            Width="150"
+            Height="26"
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Provider="{Binding Provider}"
+            SelectedItem="{Binding SelectedFruit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding TypedFruit, UpdateSourceTrigger=PropertyChanged}"
+            Watermark="Enter a fruit">
+
+            <editors:AutoCompleteTextBox.LoadingContent>
+                <TextBlock
+                    Margin="5"
+                    FontSize="14"
+                    Text="Loading..." />
+            </editors:AutoCompleteTextBox.LoadingContent>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding ConfirmAddCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </editors:AutoCompleteTextBox>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <ListBox
+                Width="100"
+                Height="100"
+                ItemsSource="{Binding Fruits}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock Grid.Column="1">
+                <Run Text="Selected fruit from the list " />
+                <Run Foreground="Red" Text="{Binding SelectedFruit}" />
+            </TextBlock>
+
+            <TextBlock Grid.Column="2">
+                <Run Text="Typed fruit" />
+                <Run Foreground="Red" Text="{Binding TypedFruit}" />
+            </TextBlock>
+        </Grid>
+
 
     </Grid>
 </Window>

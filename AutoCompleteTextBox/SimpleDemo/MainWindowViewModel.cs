@@ -1,10 +1,14 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using CommunityToolkit.Mvvm.Input;
 using SimpleDemo.Annotations;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace SimpleDemo
 {
-    public class MainWindowViewModel: INotifyPropertyChanged
+    public partial class MainWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,6 +47,72 @@ namespace SimpleDemo
                 selectedString = value;
                 OnPropertyChanged();
             }
+        }
+
+        private string selectedFruit;
+
+        public string SelectedFruit
+        {
+            get => selectedFruit;
+            set
+            {
+                selectedFruit = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string typedFruit;
+
+        public string TypedFruit
+        {
+            get => typedFruit;
+            set
+            {
+                typedFruit = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> fruits;
+        public ObservableCollection<string> Fruits
+        {
+            get => fruits;
+            set
+            {
+                fruits = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public MainWindowViewModel()
+        {
+            Fruits = new ObservableCollection<string>();
+            Fruits.Add("apple");
+            Provider = new FruitsProvider(ref fruits);
+        }
+
+        private FruitsProvider provider;
+        public FruitsProvider Provider
+        {
+            get => provider;
+            set
+            {
+                provider = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [RelayCommand]
+        private void ConfirmAdd()
+        {
+            if (SelectedFruit == null && !Fruits.Any(x => x.Equals(TypedFruit, System.StringComparison.InvariantCultureIgnoreCase)))
+            {
+                if (MessageBox.Show($"Fruit {TypedFruit} isn't in the list. Do you want to add it?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    Fruits.Add(TypedFruit);
+                }
+            }
+
         }
 
 
