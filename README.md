@@ -37,6 +37,7 @@ This control originally features:
 3. Removed support of .NET 5
 4. Added support for .NET 4.8
 
+### See our Wiki
 
 ### UPDATED DEMO !!!
 
