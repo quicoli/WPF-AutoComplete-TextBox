@@ -110,6 +110,7 @@ namespace SimpleDemo
                 if (MessageBox.Show($"Fruit {TypedFruit} isn't in the list. Do you want to add it?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     Fruits.Add(TypedFruit);
+                    SelectedFruit = Fruits.First(x => x == TypedFruit);
                 }
             }
 
