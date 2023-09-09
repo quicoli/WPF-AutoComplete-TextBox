@@ -34,6 +34,7 @@ namespace AutoCompleteTextBox.Editors
         public static readonly DependencyProperty ItemTemplateProperty = DependencyProperty.Register("ItemTemplate", typeof(DataTemplate), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
         public static readonly DependencyProperty ItemTemplateSelectorProperty = DependencyProperty.Register("ItemTemplateSelector", typeof(DataTemplateSelector), typeof(AutoCompleteTextBox));
         public static readonly DependencyProperty LoadingContentProperty = DependencyProperty.Register("LoadingContent", typeof(object), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty PreviewSelectionProperty = DependencyProperty.Register("PreviewSelection", typeof(bool), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(true));
         public static readonly DependencyProperty ProviderProperty = DependencyProperty.Register("Provider", typeof(ISuggestionProvider), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null));
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(null, OnSelectedItemChanged));
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(AutoCompleteTextBox), new FrameworkPropertyMetadata(string.Empty, propertyChangedCallback:null,coerceValueCallback:null, isAnimationProhibited:false, defaultUpdateSourceTrigger: UpdateSourceTrigger.LostFocus, flags: FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
@@ -182,6 +183,12 @@ namespace AutoCompleteTextBox.Editors
         }
 
         public Popup Popup { get; set; }
+        
+        public bool PreviewSelection
+        {
+            get => (bool)GetValue(PreviewSelectionProperty);
+            set => SetValue(PreviewSelectionProperty, value);
+        }
 
         public ISuggestionProvider Provider
         {
@@ -440,14 +447,17 @@ namespace AutoCompleteTextBox.Editors
             if (PreSelectionEventSomeoneHandled(cause, true))
                 return;
 
+            IsDropDownOpen = false;
+            _selectionCancelled = true;
+
+            if (!PreviewSelection)
+                return;
+
             _isUpdatingText = true;
             Editor.Text = SelectedItem == null ? Filter : GetDisplayText(SelectedItem);
             Editor.SelectionStart = Editor.Text.Length;
             Editor.SelectionLength = 0;
             _isUpdatingText = false;
-            IsDropDownOpen = false;
-            _selectionCancelled = true;
-
         }
 
         public event EventHandler<SelectionAdapter.PreSelectionAdapterFinishArgs> PreSelectionAdapterFinish;
@@ -469,6 +479,8 @@ namespace AutoCompleteTextBox.Editors
                 SelectedItem = ItemsSelector.SelectedItem;
                 _isUpdatingText = true;
                 Editor.Text = GetDisplayText(ItemsSelector.SelectedItem);
+                Editor.SelectionStart = Editor.Text.Length;
+                Editor.SelectionLength = 0;
                 SetSelectedItem(ItemsSelector.SelectedItem);
                 _isUpdatingText = false;
                 IsDropDownOpen = false;
@@ -477,6 +489,9 @@ namespace AutoCompleteTextBox.Editors
 
         private void OnSelectionAdapterSelectionChanged()
         {
+            if (!PreviewSelection)
+                return;
+
             _isUpdatingText = true;
             Editor.Text = ItemsSelector.SelectedItem == null ? Filter : GetDisplayText(ItemsSelector.SelectedItem);
             Editor.SelectionStart = Editor.Text.Length;
