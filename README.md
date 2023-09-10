@@ -4,7 +4,7 @@
 
 
 Install:
-```PM> Install-Package AutoCompleteTextBox -Version 1.6.0```
+```PM> Install-Package AutoCompleteTextBox -Version 1.7.0```
 
 
 >WPF AutoComplete TextBox is an original work from [Bhardwaj Deepak](http://www.codeproject.com/Tips/801004/WPF-AutoComplete-TextBox)
@@ -30,12 +30,10 @@ This control originally features:
 7. Much more from collaborators!
 
 
-### What's new in version 1.6.0?
+### What's new in version 1.7.0?
 
-1. Keyboard focus improvements (thanks @mitchcapper)
-2. Binding error on generic style (thanks @kmathiasen)
-3. Removed support of .NET 5
-4. Added support for .NET 4.8
+1. PreviewSelection property added, default true. When false, only places the suggestion's display text in the editor when the selection is committed. (thanks @johnathan-coe)
+
 
 ### See our Wiki
 
