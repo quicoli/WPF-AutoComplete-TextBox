@@ -489,6 +489,8 @@ namespace AutoCompleteTextBox.Editors
 
         private void OnSelectionAdapterSelectionChanged()
         {
+            ScrollToSelectedItem();
+            
             if (!PreviewSelection)
                 return;
 
@@ -496,7 +498,6 @@ namespace AutoCompleteTextBox.Editors
             Editor.Text = ItemsSelector.SelectedItem == null ? Filter : GetDisplayText(ItemsSelector.SelectedItem);
             Editor.SelectionStart = Editor.Text.Length;
             Editor.SelectionLength = 0;
-            ScrollToSelectedItem();
             _isUpdatingText = false;
         }
 
