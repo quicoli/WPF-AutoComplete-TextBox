@@ -5,10 +5,10 @@
 
     <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
 
-    <Style x:Key="TextBoxSuggestionItemStyle" TargetType="ListBoxItem">
+    <Style x:Key="TextBoxSuggestionItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="ListBoxItem">
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Border x:Name="ContentBorder" Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteTextBox}, Mode=OneWay}">
                         <ContentPresenter />
                     </Border>
@@ -26,10 +26,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ComboBoxSuggestionItemStyle" TargetType="ListBoxItem">
+    <Style x:Key="ComboBoxSuggestionItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="ListBoxItem">
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Border x:Name="ContentBorder" Background="{Binding Path=SuggestionBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=editors:AutoCompleteComboBox}, Mode=OneWay}">
                         <ContentPresenter />
                     </Border>
@@ -167,10 +167,11 @@
         </Setter>
     </Style>
 
-    <Style TargetType="editors:AutoCompleteComboBox">
+    <Style TargetType="{x:Type editors:AutoCompleteComboBox}">
         <Setter Property="Focusable" Value="True" />
         <Setter Property="SuggestionBackground" Value="White" />
-        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#FFABADB3" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -182,33 +183,42 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type editors:AutoCompleteComboBox}">
                     <Grid>
-                        <DockPanel>
-                            <ContentPresenter
-                                x:Name="PART_Icon"
-                                ContentSource="Icon"
-                                Visibility="{TemplateBinding IconVisibility}" />
-                            <Grid>
-                                <TextBlock
-                                    x:Name="PART_Watermark"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    DockPanel.Dock="Left"
-                                    Focusable="False"
-                                    Foreground="Gray"
-                                    Text="{TemplateBinding Watermark}"
-                                    Visibility="Collapsed" />
-                                <DockPanel Margin="3,0">
-                                    <Expander x:Name="PART_Expander" DockPanel.Dock="Right" />
+                        <ContentPresenter
+                            x:Name="PART_Icon"
+                            ContentSource="Icon"
+                            Visibility="{TemplateBinding IconVisibility}" />
+                        <Grid Margin="3,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0">
+                                <Grid>
+                                    <TextBlock
+                                        x:Name="PART_Watermark"
+                                        Margin="3,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Focusable="False"
+                                        Foreground="Gray"
+                                        Text="{TemplateBinding Watermark}"
+                                        Visibility="Collapsed" />
                                     <TextBox
                                         x:Name="PART_Editor"
                                         HorizontalAlignment="Stretch"
                                         VerticalAlignment="Center"
                                         CharacterCasing="{Binding Path=CharacterCasing, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
                                         Focusable="True"
-                                        MaxLength="{Binding Path=MaxLength, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" />
-                                </DockPanel>
-                            </Grid>
-                        </DockPanel>
+                                        MaxLength="{Binding Path=MaxLength, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
+                                        Style="{StaticResource ResourceKey=TransparentTextBoxStyle}" />
+                                </Grid>
+                            </Border>
+                            <Expander x:Name="PART_Expander" Grid.Column="1" />
+                        </Grid>
                         <Popup
                             x:Name="PART_Popup"
                             MinWidth="{TemplateBinding ActualWidth}"
@@ -246,7 +256,6 @@
                         </Popup>
 
                     </Grid>
-                    <!--</Border>-->
                     <ControlTemplate.Triggers>
                         <Trigger SourceName="PART_Editor" Property="Text" Value="">
                             <Setter TargetName="PART_Watermark" Property="Visibility" Value="Visible" />
