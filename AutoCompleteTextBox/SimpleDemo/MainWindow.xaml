@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Simple Demo"
     Width="800"
-    Height="450"
+    Height="470"
     mc:Ignorable="d">
     <Window.Resources>
         <local:NumbersProvider x:Key="NumbersProvider" />
@@ -17,6 +17,7 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -137,6 +138,14 @@
             </TextBlock>
         </Grid>
 
+        <editors:AutoCompleteComboBox
+            Grid.Row="5"
+            Width="400"
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Provider="{Binding ColorsProvider}"
+            Watermark="Enter a color" />
 
     </Grid>
 </Window>

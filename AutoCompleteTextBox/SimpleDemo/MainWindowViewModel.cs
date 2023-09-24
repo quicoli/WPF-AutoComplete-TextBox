@@ -102,6 +102,8 @@ namespace SimpleDemo
             }
         }
 
+        public ColorsProvider ColorsProvider { get; } = new();
+
         [RelayCommand]
         private void ConfirmAdd()
         {
