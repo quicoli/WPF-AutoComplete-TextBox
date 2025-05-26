@@ -2,9 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFrameworks>net452;net472;net48;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net452;net472;net48;netcoreapp3.1;net6.0-windows;net8.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <Version>1.7.2</Version>
+    <Version>1.7.3</Version>
     <PackageProjectUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</PackageProjectUrl>
     <RepositoryType />
     <RepositoryUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</RepositoryUrl>
@@ -13,7 +13,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ApplicationIcon>AutoCompleteTextBox.ico</ApplicationIcon>
     <PackageReleaseNotes>
-		AutoCompleteComboBox.Watermark visible fix.
+		AutoCompleteComboBox.IsReadOnly fix.
+		Updated version to 1.7.3.
 	</PackageReleaseNotes>
     <Description>An auto complete textbox and combo box for WPF</Description>
     <PackageIcon>AutoCompleteTextBox.png</PackageIcon>
