@@ -1,10 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFrameworks>net452;net472;net48;netcoreapp3.1;net6.0-windows;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net452;net472;net48;net6.0-windows;net8.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <Version>1.7.3</Version>
+	<SignAssembly>True</SignAssembly>
+	<AssemblyOriginatorKeyFile>AutoCompleteTextBox.snk</AssemblyOriginatorKeyFile>
+    <Version>1.7.3.1</Version>
+	<FileVersion>1.7.3.1</FileVersion>
+	<AssemblyTitle>AutoCompleteTextBox</AssemblyTitle>
+	<Description>An autocomplete textbox for WPF</Description>
+	<Product>AutoCompleteTextBox</Product>
+	<Copyright>Copyright © 2025</Copyright>
     <PackageProjectUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</PackageProjectUrl>
     <RepositoryType />
     <RepositoryUrl>https://github.com/quicoli/WPF-AutoComplete-TextBox</RepositoryUrl>
@@ -28,6 +34,19 @@
     <None Include="..\Logo\AutoCompleteTextBox.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 </Project>
